@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Isole Eolie 2026</title>
-  <meta name="description" content="Яхтенный чартер по Эолийским островам, 27.09–02.10.2026. Sun Odyssey 490 «Chaos».">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
@@ -30,10 +29,10 @@
       --border:    #D6CFC4;
       --white:     #FFFFFF;
       --radius:    6px;
-      --shadow:    0 2px 12px rgba(14,30,56,.07);
+      --shadow:    0 2px 12px rgba(14,30,56,.08);
     }
 
-    html { scroll-behavior: smooth; }
+    html, body { height: 100%; }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -41,218 +40,286 @@
       color: var(--text);
       font-size: 15px;
       line-height: 1.65;
+      display: flex;
+      flex-direction: column;
     }
 
     a { color: var(--sea); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── NAV ─────────────────────────────── */
+    /* ── NAV / TABS ──────────────────────────── */
     nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(14,30,56,.96);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      padding: 0 24px;
+      z-index: 1000;
+      background: var(--navy);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      align-items: stretch;
       height: 52px;
+      flex-shrink: 0;
     }
     .nav-brand {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       color: var(--sand-l);
-      letter-spacing: .02em;
       white-space: nowrap;
-    }
-    .nav-links {
+      padding: 0 20px;
       display: flex;
-      gap: 0;
-      list-style: none;
+      align-items: center;
+      border-right: 1px solid rgba(255,255,255,.07);
+      flex-shrink: 0;
     }
-    .nav-links a {
-      display: block;
-      padding: 0 14px;
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      padding: 0 18px;
       height: 52px;
-      line-height: 52px;
-      font-size: .75rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.55);
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: #fff; text-decoration: none; }
-    @media (max-width: 640px) {
-      .nav-links { gap: 0; }
-      .nav-links a { padding: 0 8px; font-size: .68rem; }
-    }
-    @media (max-width: 460px) {
-      .nav-brand { display: none; }
-      nav { justify-content: center; }
-    }
-
-    /* ── HERO ────────────────────────────── */
-    .hero {
-      position: relative;
-      background: var(--navy);
-      min-height: 88vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 24px 120px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(28,107,120,.35) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(201,146,74,.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hero-eyebrow {
       font-size: .72rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--sand);
-      margin-bottom: 1.2rem;
-      opacity: .9;
-    }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(4.5rem, 14vw, 10rem);
-      line-height: .88;
-      letter-spacing: -.02em;
-      color: #fff;
-      margin-bottom: .4rem;
-    }
-    .hero-year {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      letter-spacing: .45em;
-      color: rgba(255,255,255,.35);
-      margin-bottom: 2.2rem;
-    }
-    .hero-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(.95rem, 2.5vw, 1.3rem);
-      color: rgba(255,255,255,.6);
-      margin-bottom: 3rem;
-    }
-    .hero-stats {
-      display: flex;
-      gap: 0;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 28px;
-    }
-    .stat-val {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 500;
-      color: var(--sand-l);
-      line-height: 1.1;
-    }
-    .stat-lbl {
-      font-size: .68rem;
       letter-spacing: .14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,.38);
-      margin-top: 2px;
+      font-family: 'DM Sans', sans-serif;
+      color: rgba(255,255,255,.42);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s;
     }
-    .stat-sep {
-      width: 1px;
-      height: 36px;
-      background: rgba(255,255,255,.1);
-    }
-    .hero-wave {
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      right: 0;
-      line-height: 0;
-    }
-    .hero-wave svg { display: block; width: 100%; }
+    .tab-btn:hover { color: rgba(255,255,255,.75); }
+    .tab-btn.active { color: #fff; border-bottom-color: var(--sand); }
 
-    /* ── SECTIONS ────────────────────────── */
-    section { padding: 72px 0; }
+    /* ── TAB PANELS ──────────────────────────── */
+    .tab-panel { display: none; flex: 1; }
+    .tab-panel.active { display: flex; flex-direction: column; }
+    #tab-map.active { display: block; position: relative; height: calc(100vh - 52px); }
+
+    /* ── MAP ─────────────────────────────────── */
+    #leaflet-map { width: 100%; height: 100%; }
+
+    .map-overlay {
+      position: absolute;
+      z-index: 800;
+      pointer-events: none;
+    }
+    .map-trip-info {
+      top: 16px; left: 16px;
+      background: rgba(14,30,56,.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      pointer-events: auto;
+    }
+    .mti-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--sand-l);
+      line-height: 1.2;
+    }
+    .mti-sub {
+      font-size: .68rem;
+      color: rgba(255,255,255,.45);
+      margin-top: 3px;
+      letter-spacing: .04em;
+    }
+    .map-legend {
+      bottom: 28px; left: 16px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(6px);
+      padding: 8px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .73rem;
+      color: var(--mid);
+    }
+    .leg-mk {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--navy); color: var(--sand-l);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: .75rem;
+      border: 1.5px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2);
+      flex-shrink: 0;
+    }
+    .leg-mk-stop {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--sand); border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2); flex-shrink: 0;
+    }
+    .leg-mk-base {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--rust); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; border: 1.5px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2); flex-shrink: 0;
+    }
+
+    /* Leaflet popup custom styles */
+    .leaflet-popup-content-wrapper {
+      border-radius: var(--radius) !important;
+      box-shadow: 0 4px 20px rgba(14,30,56,.15) !important;
+      padding: 0 !important;
+      overflow: hidden;
+    }
+    .leaflet-popup-content { margin: 0 !important; }
+    .leaflet-popup-tip-container { display: none; }
+
+    .popup-card {
+      font-family: 'DM Sans', sans-serif;
+      min-width: 200px;
+      max-width: 240px;
+    }
+    .popup-day {
+      background: var(--navy);
+      padding: 8px 14px 6px;
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+    }
+    .popup-day strong {
+      color: var(--sand-l);
+      font-weight: 500;
+    }
+    .popup-body {
+      padding: 10px 14px 12px;
+    }
+    .popup-name {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .popup-island {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .popup-badges { display: flex; gap: 5px; margin-bottom: 10px; }
+    .badge {
+      display: inline-block;
+      font-size: .62rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+    .badge-marina { background: rgba(14,30,56,.08); color: var(--navy-mid); }
+    .badge-buoy   { background: rgba(28,107,120,.1); color: var(--sea); }
+    .badge-ok     { background: var(--green-bg); color: var(--green); }
+    .popup-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .popup-link {
+      display: block;
+      padding-top: 9px;
+      border-top: 1px solid var(--cream-d);
+      font-size: .8rem;
+      color: var(--sea) !important;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none !important;
+    }
+    .popup-link:hover { color: var(--sea-l) !important; }
+
+    /* map mk icons */
+    .map-mk {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--navy); color: var(--sand-l);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: .92rem; font-weight: 500;
+      border: 2px solid rgba(255,255,255,.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+    .map-mk-stop {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--sand); border: 2px solid #fff;
+      box-shadow: 0 1px 5px rgba(0,0,0,.25);
+    }
+    .map-mk-base {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--rust); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; border: 2px solid rgba(255,255,255,.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+
+    /* ── CONTENT TABS ────────────────────────── */
+    .tab-content {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--cream);
+    }
+    section { padding: 56px 0; }
     section:nth-child(even) { background: var(--cream-d); }
     .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
-    .container--wide { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .container--wide { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
 
     .section-label {
-      font-size: .7rem;
+      font-size: .68rem;
       letter-spacing: .22em;
       text-transform: uppercase;
       color: var(--sand);
-      margin-bottom: .5rem;
+      margin-bottom: .4rem;
     }
     .section-title {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
       font-weight: 400;
       color: var(--navy);
-      margin-bottom: .6rem;
+      margin-bottom: .5rem;
       line-height: 1.1;
     }
     .section-rule {
-      width: 48px;
-      height: 2px;
+      width: 40px; height: 2px;
       background: var(--sand);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.2rem;
     }
 
-    /* ── ROUTE TIMELINE ──────────────────── */
-    .timeline {
-      position: relative;
-      padding-left: 72px;
-    }
+    /* ── ROUTE TIMELINE ──────────────────────── */
+    .timeline { position: relative; padding-left: 68px; }
     .timeline::before {
       content: '';
       position: absolute;
-      left: 27px;
-      top: 8px;
-      bottom: 8px;
+      left: 25px; top: 8px; bottom: 8px;
       width: 1px;
       background: linear-gradient(to bottom, var(--border) 0%, var(--border) 85%, transparent 100%);
     }
-    .day {
-      position: relative;
-      margin-bottom: 2.5rem;
-    }
+    .day { position: relative; margin-bottom: 2.2rem; }
     .day:last-child { margin-bottom: 0; }
     .day-dot {
       position: absolute;
-      left: -72px;
-      top: 4px;
-      width: 36px;
-      height: 36px;
+      left: -68px; top: 4px;
+      width: 34px; height: 34px;
       border-radius: 50%;
       background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: .95rem;
-      font-weight: 500;
+      font-style: italic; font-size: .9rem; font-weight: 500;
       color: var(--sand-l);
-      flex-shrink: 0;
       border: 2px solid var(--navy-mid);
       z-index: 1;
     }
@@ -260,252 +327,214 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px 24px 18px;
+      padding: 18px 22px 16px;
       box-shadow: var(--shadow);
     }
     .day-meta-row {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 6px;
+      display: flex; align-items: baseline;
+      gap: 10px; flex-wrap: wrap;
+      margin-bottom: 5px;
     }
-    .day-date {
-      font-size: .73rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+    .day-date { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
     .day-distance {
-      font-size: .73rem;
-      color: var(--sea);
+      font-size: .7rem; color: var(--sea);
       background: rgba(28,107,120,.08);
-      padding: 1px 7px;
-      border-radius: 3px;
+      padding: 1px 7px; border-radius: 3px;
     }
     .day-route {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--navy);
-      margin-bottom: .5rem;
-      line-height: 1.3;
+      font-size: 1.2rem; font-weight: 500;
+      color: var(--navy); margin-bottom: 3px; line-height: 1.3;
     }
-    .day-title {
-      font-size: .78rem;
-      font-style: italic;
-      color: var(--muted);
-      margin-bottom: .9rem;
-    }
-    .day-program {
-      list-style: none;
-      margin-bottom: .9rem;
-    }
+    .day-title { font-size: .75rem; font-style: italic; color: var(--muted); margin-bottom: .8rem; }
+    .day-program { list-style: none; margin-bottom: .8rem; }
     .day-program li {
-      padding: 3px 0 3px 18px;
+      padding: 2px 0 2px 16px;
       position: relative;
-      font-size: .88rem;
-      color: var(--mid);
+      font-size: .85rem; color: var(--mid);
     }
     .day-program li::before {
-      content: '·';
-      position: absolute;
-      left: 4px;
-      color: var(--sand);
-      font-size: 1.2rem;
-      line-height: 1;
-      top: 2px;
+      content: '·'; position: absolute; left: 4px;
+      color: var(--sand); font-size: 1.2rem; line-height: 1; top: 1px;
     }
     .day-overnight {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      display: flex; align-items: flex-start; gap: 8px;
       padding-top: 10px;
       border-top: 1px solid var(--cream-d);
-      font-size: .83rem;
+      font-size: .82rem;
     }
-    .overnight-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
     .overnight-name { font-weight: 500; color: var(--navy); }
     .overnight-type {
       display: inline-block;
-      font-size: .65rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      padding: 1px 6px;
-      border-radius: 3px;
-      margin-left: 6px;
-      vertical-align: middle;
+      font-size: .63rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: 1px 6px; border-radius: 3px; margin-left: 6px;
     }
     .type-marina { background: rgba(14,30,56,.08); color: var(--navy-mid); }
     .type-buoy   { background: rgba(28,107,120,.1); color: var(--sea); }
     .day-alert {
-      margin-top: 10px;
-      padding: 8px 12px;
+      margin-top: 9px; padding: 7px 12px;
       background: rgba(168,59,42,.06);
       border-left: 3px solid var(--rust);
       border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: .82rem;
-      color: var(--rust);
+      font-size: .8rem; color: var(--rust);
     }
 
-    /* ── MAP ─────────────────────────────── */
-    #map-section { padding-bottom: 0; }
-    #leaflet-map {
-      height: 480px;
-      width: 100%;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .map-header { padding: 72px 0 32px; }
-    .leaflet-popup-content-wrapper {
-      border-radius: var(--radius) !important;
-      box-shadow: var(--shadow) !important;
-      font-family: 'DM Sans', sans-serif !important;
-      font-size: 13px !important;
-    }
-    .map-mk {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .85rem;
-      font-weight: 600;
-      border: 2px solid #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,.25);
-      background: var(--navy);
-      color: var(--sand-l);
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-    }
-    .map-mk-stop {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--sand);
-      border: 2px solid #fff;
-      box-shadow: 0 1px 4px rgba(0,0,0,.2);
-    }
-    .map-mk-base {
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .75rem;
-      background: var(--rust);
-      color: #fff;
-      border: 2px solid #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,.25);
-    }
-
-    /* ── MARINAS ─────────────────────────── */
-    .marinas-grid {
+    /* ── MARINA DETAIL CARDS ─────────────────── */
+    .marinas-list {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
     }
-    .marina-card {
+    @media (max-width: 480px) { .marinas-list { grid-template-columns: 1fr; } }
+
+    .marina-detail {
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px;
+      overflow: hidden;
       box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      scroll-margin-top: 24px;
+      transition: box-shadow .25s;
     }
-    .marina-head {
+    .marina-detail.highlight {
+      animation: pulse .9s ease-out;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(201,146,74,.55); }
+      60%  { box-shadow: 0 0 0 10px rgba(201,146,74,0); }
+      100% { box-shadow: 0 0 0 0 rgba(201,146,74,0); }
+    }
+
+    .md-header {
+      background: var(--navy);
+      padding: 14px 20px 12px;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
     }
-    .marina-day-badge {
-      font-size: .65rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      background: var(--cream-d);
-      padding: 2px 7px;
-      border-radius: 3px;
-      white-space: nowrap;
-      flex-shrink: 0;
+    .md-day-badge {
+      font-size: .63rem; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      background: rgba(255,255,255,.07);
+      padding: 2px 8px; border-radius: 3px;
+      white-space: nowrap; flex-shrink: 0;
     }
-    .marina-name {
+    .md-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.12rem;
-      font-weight: 500;
-      color: var(--navy);
-      line-height: 1.2;
+      font-size: 1.2rem; font-weight: 500;
+      color: var(--sand-l); line-height: 1.2;
     }
-    .marina-island {
-      font-size: .78rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: .7rem;
-      letter-spacing: .06em;
-      padding: 3px 9px;
-      border-radius: 3px;
-      background: var(--green-bg);
-      color: var(--green);
-      font-weight: 500;
-    }
-    .status-badge-dep {
-      background: rgba(201,146,74,.12);
-      color: #7A5520;
-    }
-    .marina-contacts {
-      list-style: none;
-      font-size: .82rem;
-      color: var(--mid);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .marina-contacts li { display: flex; gap: 8px; align-items: flex-start; }
-    .mc-icon { color: var(--muted); width: 14px; flex-shrink: 0; margin-top: 1px; font-style: normal; }
-    .marina-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--navy);
-    }
-    .marina-price-note { font-size: .72rem; color: var(--muted); font-family: 'DM Sans', sans-serif; }
-    .marina-notes {
-      list-style: none;
-      font-size: .78rem;
-      color: var(--mid);
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      padding-top: 10px;
-      border-top: 1px solid var(--cream-d);
-    }
-    .marina-notes li { padding-left: 12px; position: relative; }
-    .marina-notes li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+    .md-island { font-size: .78rem; color: rgba(255,255,255,.45); margin-top: 3px; }
 
-    /* screenshots placeholder */
-    .marina-screenshots {
+    .md-body { padding: 16px 20px; }
+
+    .md-badges { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+
+    .md-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 500;
+      color: var(--navy); line-height: 1;
+    }
+    .md-price-note { font-size: .72rem; color: var(--muted); margin-top: 2px; font-family: 'DM Sans', sans-serif; }
+    .md-price-wrap { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--cream-d); }
+
+    .md-section { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--cream-d); }
+    .md-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .md-section-title {
+      font-size: .65rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .contact-list li { display: flex; gap: 10px; align-items: flex-start; font-size: .83rem; }
+    .ci { color: var(--muted); flex-shrink: 0; width: 16px; text-align: center; margin-top: 1px; font-style: normal; }
+
+    .notes-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+    .notes-list li { padding-left: 14px; position: relative; font-size: .8rem; color: var(--mid); }
+    .notes-list li::before { content: '—'; position: absolute; left: 0; color: var(--border); }
+
+    /* DOCUMENTS */
+    .doc-gallery {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 10px;
+      min-height: 0;
+    }
+    .doc-item { position: relative; }
+    .doc-item img {
+      width: 80px; height: 64px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: block;
+      cursor: pointer;
+    }
+    .doc-item img:hover { opacity: .85; }
+    .doc-remove {
+      position: absolute; top: -5px; right: -5px;
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      background: var(--navy); color: rgba(255,255,255,.9);
+      border: none; cursor: pointer;
+      font-size: 11px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    }
+    .doc-upload-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px;
       border: 1.5px dashed var(--border);
       border-radius: var(--radius);
-      padding: 14px;
-      text-align: center;
-      font-size: .75rem;
-      color: var(--muted);
+      font-size: .78rem; color: var(--muted);
       cursor: pointer;
-      transition: border-color .2s, background .2s;
+      transition: border-color .2s, color .2s, background .2s;
+      background: transparent;
     }
-    .marina-screenshots:hover { border-color: var(--sand); background: rgba(201,146,74,.04); }
-    .marina-screenshots input[type=file] { display: none; }
+    .doc-upload-btn:hover { border-color: var(--sand); color: var(--mid); background: rgba(201,146,74,.04); }
+    .doc-upload-btn input { display: none; }
+    .doc-empty { font-size: .78rem; color: var(--muted); font-style: italic; margin-bottom: 8px; }
 
-    /* ── BUDGET ──────────────────────────── */
-    .budget-grid {
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.88);
+      align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 94vw; max-height: 90vh; object-fit: contain; border-radius: 4px; }
+    .lb-close {
+      position: absolute; top: 16px; right: 20px;
+      color: rgba(255,255,255,.6); font-size: 1.6rem;
+      cursor: pointer; line-height: 1;
+      background: none; border: none;
+    }
+
+    /* BOAT CARD */
+    .boat-card {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 20px 24px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 7px 24px;
+      margin-top: 32px;
     }
-    @media (max-width: 640px) { .budget-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 480px) { .boat-card { grid-template-columns: 1fr; } }
+    .boat-title {
+      grid-column: 1 / -1;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1.3rem;
+      color: var(--sand-l); margin-bottom: 4px;
+    }
+    .boat-row { display: flex; gap: 8px; align-items: baseline; }
+    .bk { color: rgba(255,255,255,.3); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; min-width: 56px; }
+    .bv { color: rgba(255,255,255,.75); font-size: .83rem; }
+
+    /* ── BUDGET ──────────────────────────────── */
+    .budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 600px) { .budget-grid { grid-template-columns: 1fr; } }
     .budget-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -513,200 +542,49 @@
       overflow: hidden;
       box-shadow: var(--shadow);
     }
-    .budget-card-title {
-      background: var(--navy);
-      color: var(--sand-l);
-      padding: 10px 16px;
-      font-size: .72rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      font-family: 'DM Sans', sans-serif;
+    .bc-title {
+      background: var(--navy); color: var(--sand-l);
+      padding: 9px 16px;
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
     }
     table { width: 100%; border-collapse: collapse; }
-    th {
-      text-align: left;
-      font-size: .68rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 8px 16px;
-      border-bottom: 1px solid var(--cream-d);
-    }
-    td {
-      padding: 8px 16px;
-      font-size: .85rem;
-      color: var(--mid);
-      border-bottom: 1px solid var(--cream-d);
-      vertical-align: top;
-    }
+    th { text-align: left; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 8px 16px; border-bottom: 1px solid var(--cream-d); }
+    td { padding: 8px 16px; font-size: .83rem; color: var(--mid); border-bottom: 1px solid var(--cream-d); vertical-align: top; }
     tr:last-child td { border-bottom: none; }
-    tr.total td {
-      font-weight: 600;
-      color: var(--navy);
-      background: rgba(14,30,56,.03);
-      border-top: 1px solid var(--border);
-    }
-    td.amount {
-      text-align: right;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--navy);
-      white-space: nowrap;
-    }
-    .budget-note {
-      padding: 10px 16px;
-      font-size: .75rem;
-      color: var(--muted);
-      font-style: italic;
-      border-top: 1px solid var(--cream-d);
-    }
+    tr.total td { font-weight: 600; color: var(--navy); background: rgba(14,30,56,.03); border-top: 1px solid var(--border); }
+    td.amount { text-align: right; font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: var(--navy); white-space: nowrap; }
+    .bc-note { padding: 9px 16px; font-size: .73rem; color: var(--muted); font-style: italic; border-top: 1px solid var(--cream-d); }
 
-    /* ── CHECKLISTS ──────────────────────── */
-    .checklist-groups { display: flex; flex-direction: column; gap: 12px; }
-    .cl-group {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    .cl-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
-      cursor: pointer;
-      user-select: none;
-      gap: 12px;
-    }
+    /* ── CHECKLISTS ──────────────────────────── */
+    .cl-groups { display: flex; flex-direction: column; gap: 10px; }
+    .cl-group { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    .cl-head { display: flex; align-items: center; justify-content: space-between; padding: 13px 18px; cursor: pointer; user-select: none; gap: 12px; }
     .cl-head:hover { background: rgba(14,30,56,.02); }
-    .cl-head-left { display: flex; align-items: center; gap: 12px; }
-    .cl-icon { font-size: 1.1rem; }
-    .cl-title {
-      font-size: .9rem;
-      font-weight: 500;
-      color: var(--navy);
-    }
-    .cl-count {
-      font-size: .73rem;
-      color: var(--muted);
-    }
-    .cl-arrow {
-      font-size: .75rem;
-      color: var(--muted);
-      transition: transform .25s;
-      flex-shrink: 0;
-    }
+    .cl-left { display: flex; align-items: center; gap: 10px; }
+    .cl-icon { font-size: 1rem; }
+    .cl-title { font-size: .88rem; font-weight: 500; color: var(--navy); }
+    .cl-count { font-size: .72rem; color: var(--muted); }
+    .cl-arrow { font-size: .72rem; color: var(--muted); transition: transform .22s; flex-shrink: 0; }
     .cl-group.open .cl-arrow { transform: rotate(180deg); }
-    .cl-body {
-      display: none;
-      padding: 4px 20px 16px;
-      border-top: 1px solid var(--cream-d);
-    }
+    .cl-body { display: none; padding: 4px 18px 14px; border-top: 1px solid var(--cream-d); }
     .cl-group.open .cl-body { display: block; }
-    .cl-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 6px 0;
-      cursor: pointer;
-    }
+    .cl-item { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; cursor: pointer; }
     .cl-item input[type=checkbox] { display: none; }
-    .cl-box {
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid var(--border);
-      border-radius: 3px;
-      flex-shrink: 0;
-      margin-top: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .15s, border-color .15s;
-      background: var(--white);
-    }
+    .cl-box { width: 17px; height: 17px; border: 1.5px solid var(--border); border-radius: 3px; flex-shrink: 0; margin-top: 3px; display: flex; align-items: center; justify-content: center; transition: background .15s, border-color .15s; background: var(--white); }
     .cl-item:hover .cl-box { border-color: var(--sea); }
-    .cl-item.checked .cl-box {
-      background: var(--green);
-      border-color: var(--green);
-    }
-    .cl-item.checked .cl-box::after {
-      content: '';
-      display: block;
-      width: 5px;
-      height: 9px;
-      border: 2px solid #fff;
-      border-top: none;
-      border-left: none;
-      transform: rotate(42deg) translate(-1px, -1px);
-    }
-    .cl-item-text {
-      font-size: .85rem;
-      color: var(--mid);
-      transition: color .15s;
-      line-height: 1.5;
-    }
-    .cl-item.checked .cl-item-text {
-      color: var(--muted);
-      text-decoration: line-through;
-      text-decoration-color: rgba(0,0,0,.2);
-    }
+    .cl-item.checked .cl-box { background: var(--green); border-color: var(--green); }
+    .cl-item.checked .cl-box::after { content: ''; display: block; width: 4px; height: 8px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(42deg) translate(-1px,-1px); }
+    .cl-text { font-size: .83rem; color: var(--mid); line-height: 1.5; }
+    .cl-item.checked .cl-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(0,0,0,.18); }
 
-    /* ── BOAT CARD ───────────────────────── */
-    .boat-card {
-      background: var(--navy);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      color: rgba(255,255,255,.7);
-      font-size: .85rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 24px;
-    }
-    @media (max-width: 480px) { .boat-card { grid-template-columns: 1fr; } }
-    .boat-card-title {
-      grid-column: 1 / -1;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.4rem;
-      color: var(--sand-l);
-      margin-bottom: 4px;
-    }
-    .boat-row { display: flex; gap: 8px; align-items: baseline; }
-    .boat-key { color: rgba(255,255,255,.35); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; min-width: 60px; }
-    .boat-val { color: rgba(255,255,255,.8); }
+    /* ── FOOTER ──────────────────────────────── */
+    footer { background: var(--navy); color: rgba(255,255,255,.35); text-align: center; padding: 32px 24px; font-size: .78rem; flex-shrink: 0; }
+    .footer-motto { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .95rem; color: rgba(255,255,255,.25); margin-top: 8px; }
 
-    /* ── FOOTER ──────────────────────────── */
-    footer {
-      background: var(--navy);
-      color: rgba(255,255,255,.4);
-      text-align: center;
-      padding: 40px 24px;
-      font-size: .8rem;
-    }
-    .footer-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.8rem;
-      color: rgba(255,255,255,.15);
-      margin-bottom: 8px;
-    }
-    .footer-motto {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: rgba(255,255,255,.3);
-      margin-top: 12px;
-    }
-
-    /* ── RESPONSIVE ──────────────────────── */
-    @media (max-width: 600px) {
-      .timeline { padding-left: 56px; }
-      .timeline::before { left: 19px; }
-      .day-dot { left: -56px; width: 30px; height: 30px; font-size: .82rem; }
-      .stat { padding: 0 16px; }
-      .stat-val { font-size: 1.6rem; }
+    @media (max-width: 560px) {
+      .timeline { padding-left: 52px; }
+      .timeline::before { left: 17px; }
+      .day-dot { left: -52px; width: 28px; height: 28px; font-size: .8rem; }
     }
   </style>
 </head>
@@ -714,756 +592,877 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-brand">Isole Eolie '26</span>
-  <ul class="nav-links">
-    <li><a href="#route">Маршрут</a></li>
-    <li><a href="#map-section">Карта</a></li>
-    <li><a href="#marinas">Марины</a></li>
-    <li><a href="#budget">Бюджет</a></li>
-    <li><a href="#checklists">Чек-листы</a></li>
-  </ul>
+  <div class="nav-brand">Isole Eolie '26</div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="map">Карта</button>
+    <button class="tab-btn" data-tab="route">Маршрут</button>
+    <button class="tab-btn" data-tab="marinas">Марины</button>
+    <button class="tab-btn" data-tab="budget">Бюджет</button>
+    <button class="tab-btn" data-tab="checklists">Чек-листы</button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <p class="hero-eyebrow">Яхтенный чартер · Spartivento · Sun Odyssey 490</p>
-  <h1 class="hero-title">Isole<br>Eolie</h1>
-  <p class="hero-year">2 0 2 6</p>
-  <p class="hero-sub">«Chaos» &thinsp;·&thinsp; 27 сентября — 2 октября</p>
-  <div class="hero-stats">
-    <div class="stat">
-      <span class="stat-val">6</span>
-      <span class="stat-lbl">дней</span>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat">
-      <span class="stat-val">~110</span>
-      <span class="stat-lbl">морских миль</span>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat">
-      <span class="stat-val">12</span>
-      <span class="stat-lbl">человек</span>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat">
-      <span class="stat-val">5</span>
-      <span class="stat-lbl">островов</span>
-    </div>
+<!-- ── TAB: КАРТА ──────────────────────────── -->
+<div id="tab-map" class="tab-panel active">
+  <div id="leaflet-map"></div>
+
+  <div class="map-overlay map-trip-info">
+    <div class="mti-title">Isole Eolie 2026</div>
+    <div class="mti-sub">27.09 – 02.10 · Sun Odyssey 490 «Chaos» · ~110 NM</div>
   </div>
-  <div class="hero-wave">
-    <svg viewBox="0 0 1440 64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,40 C240,64 480,16 720,40 C960,64 1200,20 1440,40 L1440,64 L0,64 Z" fill="#F7F3EC"/>
-    </svg>
+
+  <div class="map-overlay map-legend">
+    <div class="legend-row"><div class="leg-mk">I</div><span>Марина / буй (ночёвка)</span></div>
+    <div class="legend-row"><div class="leg-mk-stop"></div><span>Якорная стоянка</span></div>
+    <div class="legend-row"><div class="leg-mk-base">⚑</div><span>База (Capo d'Orlando)</span></div>
   </div>
 </div>
 
-<!-- ROUTE -->
-<section id="route">
-  <div class="container">
-    <p class="section-label">День за днём</p>
-    <h2 class="section-title">Маршрут</h2>
-    <div class="section-rule"></div>
+<!-- ── TAB: МАРШРУТ ────────────────────────── -->
+<div id="tab-route" class="tab-panel">
+  <div class="tab-content">
+    <section>
+      <div class="container">
+        <p class="section-label">День за днём</p>
+        <h2 class="section-title">Маршрут</h2>
+        <div class="section-rule"></div>
 
-    <div class="timeline">
+        <div class="timeline">
 
-      <!-- Day I -->
-      <div class="day">
-        <div class="day-dot">I</div>
-        <div class="day-card">
-          <div class="day-meta-row">
-            <span class="day-date">27 сентября · воскресенье</span>
-            <span class="day-distance">≈22–25 NM · ~3.5 ч</span>
-          </div>
-          <h3 class="day-route">Capo d'Orlando → Vulcano</h3>
-          <p class="day-title">Старт и переход на Вулкано</p>
-          <ul class="day-program">
-            <li>Утром — чек-ин чартера у Spartivento, инструктаж, закупка провианта</li>
-            <li>Выход после оформления документов</li>
-            <li>По пути обед на якоре у Punta dell'Asino Sud — маяк, пляж с чёрным песком</li>
-            <li>К вечеру — швартовка кормой в Baia Levante</li>
-            <li>Опционально: подъём на кратер Gran Cratere (~1 ч) на закат</li>
-          </ul>
-          <div class="day-overnight">
-            <span class="overnight-icon">⚓</span>
-            <div>
-              <span class="overnight-name">Marina Baia Levante</span>
-              <span class="overnight-type type-marina">марина</span>
-              <div style="color:var(--muted);font-size:.78rem;margin-top:2px;">Vulcano, Porto di Levante</div>
+          <div class="day">
+            <div class="day-dot">I</div>
+            <div class="day-card">
+              <div class="day-meta-row">
+                <span class="day-date">27 сентября · воскресенье</span>
+                <span class="day-distance">≈22–25 NM · ~3.5 ч</span>
+              </div>
+              <h3 class="day-route">Capo d'Orlando → Vulcano</h3>
+              <p class="day-title">Старт и переход на Вулкано</p>
+              <ul class="day-program">
+                <li>Утром — чек-ин чартера у Spartivento, инструктаж, закупка провианта</li>
+                <li>Выход после оформления документов</li>
+                <li>По пути обед на якоре у Punta dell'Asino Sud — маяк, пляж с чёрным песком</li>
+                <li>К вечеру — швартовка кормой в Baia Levante</li>
+                <li>Опционально: подъём на кратер Gran Cratere (~1 ч) на закат</li>
+              </ul>
+              <div class="day-overnight">
+                <span>⚓</span>
+                <div>
+                  <span class="overnight-name">Marina Baia Levante</span>
+                  <span class="overnight-type type-marina">марина</span>
+                  <div style="color:var(--muted);font-size:.75rem;margin-top:1px;">Vulcano, Porto di Levante</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Day II -->
-      <div class="day">
-        <div class="day-dot">II</div>
-        <div class="day-card">
-          <div class="day-meta-row">
-            <span class="day-date">28 сентября · понедельник</span>
-            <span class="day-distance">≈18 NM · расслабленный день</span>
-          </div>
-          <h3 class="day-route">Vulcano → Cala Junco → Panarea</h3>
-          <p class="day-title">Через Cala Junco на Панарею</p>
-          <ul class="day-program">
-            <li>Утром заправить воду, выкинуть мусор — следующие 2 ночи на буях</li>
-            <li>Выход не позже 12:00</li>
-            <li>Обед и купание на якоре у Cala Junco или Cala Zimmari (с детьми лучше Zimmari — песок, мелководье)</li>
-            <li>К вечеру — буй на северной стороне Panarea, в локации Iditella</li>
-            <li>Прогулка на тузике/шаттле в городок San Pietro, ужин на берегу</li>
-          </ul>
-          <div class="day-overnight">
-            <span class="overnight-icon">⚓</span>
-            <div>
-              <span class="overnight-name">Sea Panarea</span>
-              <span class="overnight-type type-buoy">буй</span>
-              <div style="color:var(--muted);font-size:.78rem;margin-top:2px;">Panarea, Iditella (северная сторона)</div>
+          <div class="day">
+            <div class="day-dot">II</div>
+            <div class="day-card">
+              <div class="day-meta-row">
+                <span class="day-date">28 сентября · понедельник</span>
+                <span class="day-distance">≈18 NM · расслабленный день</span>
+              </div>
+              <h3 class="day-route">Vulcano → Cala Junco → Panarea</h3>
+              <p class="day-title">Через Cala Junco на Панарею</p>
+              <ul class="day-program">
+                <li>Утром заправить воду, выкинуть мусор — следующие 2 ночи на буях</li>
+                <li>Выход не позже 12:00</li>
+                <li>Обед и купание на якоре у Cala Junco или Cala Zimmari (с детьми лучше Zimmari — песок, мелководье)</li>
+                <li>К вечеру — буй на северной стороне Panarea, Iditella</li>
+                <li>Прогулка на тузике/шаттле в городок San Pietro, ужин на берегу</li>
+              </ul>
+              <div class="day-overnight">
+                <span>⚓</span>
+                <div>
+                  <span class="overnight-name">Sea Panarea</span>
+                  <span class="overnight-type type-buoy">буй</span>
+                  <div style="color:var(--muted);font-size:.75rem;margin-top:1px;">Panarea, Iditella (северная сторона)</div>
+                </div>
+              </div>
+              <div class="day-alert">⚠ 25.09 — написать Клаудии (Sea Panarea) для проверки погоды</div>
             </div>
           </div>
-          <div class="day-alert">⚠ 25.09 — написать Клаудии (Sea Panarea) для проверки погоды</div>
-        </div>
-      </div>
 
-      <!-- Day III -->
-      <div class="day">
-        <div class="day-dot">III</div>
-        <div class="day-card">
-          <div class="day-meta-row">
-            <span class="day-date">29 сентября · вторник</span>
-            <span class="day-distance">≈17 NM · остановка Lisca Bianca</span>
-          </div>
-          <h3 class="day-route">Panarea → Lisca Bianca → Stromboli</h3>
-          <p class="day-title">Фумаролы и переход к вулкану</p>
-          <ul class="day-program">
-            <li>Утром не торопиться, поздний завтрак</li>
-            <li>Lisca Bianca — подводные фумаролы, маска и трубка (пузырьки со дна)</li>
-            <li>По пути пройти мимо Basiluzzo и Scoglio Spinazzola — красивые скалы</li>
-            <li>К 15–16 — на буй у Стромболи, прогулка по городку, ужин в Lounge Bar</li>
-            <li>Лечь пораньше — завтра рассвет у вулкана</li>
-          </ul>
-          <div class="day-overnight">
-            <span class="overnight-icon">⚓</span>
-            <div>
-              <span class="overnight-name">Marina del Gabbiano</span>
-              <span class="overnight-type type-buoy">буй</span>
-              <div style="color:var(--muted);font-size:.78rem;margin-top:2px;">Stromboli, Punta Lena (~600 м к северу от порта)</div>
+          <div class="day">
+            <div class="day-dot">III</div>
+            <div class="day-card">
+              <div class="day-meta-row">
+                <span class="day-date">29 сентября · вторник</span>
+                <span class="day-distance">≈17 NM · остановка Lisca Bianca</span>
+              </div>
+              <h3 class="day-route">Panarea → Lisca Bianca → Stromboli</h3>
+              <p class="day-title">Фумаролы и переход к вулкану</p>
+              <ul class="day-program">
+                <li>Утром не торопиться, поздний завтрак</li>
+                <li>Lisca Bianca — подводные фумаролы, маска и трубка (пузырьки со дна)</li>
+                <li>По пути пройти мимо Basiluzzo и Scoglio Spinazzola</li>
+                <li>К 15–16 — на буй у Стромболи, прогулка по городку, ужин в Lounge Bar</li>
+                <li>Лечь пораньше — завтра рассвет у вулкана</li>
+              </ul>
+              <div class="day-overnight">
+                <span>⚓</span>
+                <div>
+                  <span class="overnight-name">Marina del Gabbiano</span>
+                  <span class="overnight-type type-buoy">буй</span>
+                  <div style="color:var(--muted);font-size:.75rem;margin-top:1px;">Stromboli, Punta Lena (~600 м к северу от порта)</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Day IV -->
-      <div class="day">
-        <div class="day-dot">IV</div>
-        <div class="day-card">
-          <div class="day-meta-row">
-            <span class="day-date">30 сентября · среда</span>
-            <span class="day-distance">≈22 NM · ранний выход</span>
-          </div>
-          <h3 class="day-route">Stromboli (рассвет) → Salina</h3>
-          <p class="day-title">Извержения на рассвете и переход на Салину</p>
-          <ul class="day-program">
-            <li>Подъём ~05:30, выход с буя в 06:00 (восход ~07:00 — уточнить ближе к дате)</li>
-            <li>Обогнуть Стромболи с севера (~3 NM) — над Sciara del Fuoco лучше всего видно извержения</li>
-            <li>Встать в дрейф (двигатель не выключать), наблюдать до первых лучей</li>
-            <li>После рассвета — курс на Salina, к ~10–11 в марине</li>
-            <li>Заправиться водой и топливом, прогулка по Santa Marina, отдых</li>
-          </ul>
-          <div class="day-overnight">
-            <span class="overnight-icon">⚓</span>
-            <div>
-              <span class="overnight-name">Marina Salina (Marinedì)</span>
-              <span class="overnight-type type-marina">марина</span>
-              <div style="color:var(--muted);font-size:.78rem;margin-top:2px;">Santa Marina Salina</div>
+          <div class="day">
+            <div class="day-dot">IV</div>
+            <div class="day-card">
+              <div class="day-meta-row">
+                <span class="day-date">30 сентября · среда</span>
+                <span class="day-distance">≈22 NM · ранний выход</span>
+              </div>
+              <h3 class="day-route">Stromboli (рассвет) → Salina</h3>
+              <p class="day-title">Извержения на рассвете и переход на Салину</p>
+              <ul class="day-program">
+                <li>Подъём ~05:30, выход с буя в 06:00 (восход ~07:00)</li>
+                <li>Обогнуть Стромболи с севера — над Sciara del Fuoco лучше всего видно извержения</li>
+                <li>Встать в дрейф (двигатель не выключать), наблюдать до первых лучей</li>
+                <li>После рассвета — курс на Salina, к ~10–11 в марине</li>
+                <li>Заправиться водой и топливом, прогулка по Santa Marina, отдых</li>
+              </ul>
+              <div class="day-overnight">
+                <span>⚓</span>
+                <div>
+                  <span class="overnight-name">Marina Salina (Marinedì)</span>
+                  <span class="overnight-type type-marina">марина</span>
+                  <div style="color:var(--muted);font-size:.75rem;margin-top:1px;">Santa Marina Salina</div>
+                </div>
+              </div>
+              <div class="day-alert">⚠ Самый ранний день — подъём ~05:30</div>
             </div>
           </div>
-          <div class="day-alert">⚠ Самый ранний день — подъём ~05:30, выход в 06:00</div>
-        </div>
-      </div>
 
-      <!-- Day V -->
-      <div class="day">
-        <div class="day-dot">V</div>
-        <div class="day-card">
-          <div class="day-meta-row">
-            <span class="day-date">1 октября · четверг</span>
-            <span class="day-distance">≈17 NM · спокойный день</span>
-          </div>
-          <h3 class="day-route">Salina → Pollara → Lipari</h3>
-          <p class="day-title">Pollara и переход на Липари</p>
-          <ul class="day-program">
-            <li>Утром выйти, обогнуть Salina с севера</li>
-            <li>Pollara — пляж-амфитеатр с обрывами (из «Il Postino»), обед и купание на якоре ~2 ч</li>
-            <li>Короткий переход на Lipari (6–7 NM)</li>
-            <li>К вечеру — швартовка в Porto Pignataro</li>
-            <li>Душ, ужин, отдых. Бесплатный трансфер в центр Lipari</li>
-          </ul>
-          <div class="day-overnight">
-            <span class="overnight-icon">⚓</span>
-            <div>
-              <span class="overnight-name">EOLMARE Marina Resort</span>
-              <span class="overnight-type type-marina">марина</span>
-              <div style="color:var(--muted);font-size:.78rem;margin-top:2px;">Lipari, Porto Pignataro</div>
+          <div class="day">
+            <div class="day-dot">V</div>
+            <div class="day-card">
+              <div class="day-meta-row">
+                <span class="day-date">1 октября · четверг</span>
+                <span class="day-distance">≈17 NM · спокойный день</span>
+              </div>
+              <h3 class="day-route">Salina → Pollara → Lipari</h3>
+              <p class="day-title">Pollara и переход на Липари</p>
+              <ul class="day-program">
+                <li>Утром выйти, обогнуть Salina с севера</li>
+                <li>Pollara — пляж-амфитеатр с обрывами (из «Il Postino»), обед и купание ~2 ч</li>
+                <li>Короткий переход на Lipari (6–7 NM)</li>
+                <li>К вечеру — швартовка в Porto Pignataro</li>
+                <li>Душ, ужин, отдых. Бесплатный трансфер в центр Lipari</li>
+              </ul>
+              <div class="day-overnight">
+                <span>⚓</span>
+                <div>
+                  <span class="overnight-name">EOLMARE Marina Resort</span>
+                  <span class="overnight-type type-marina">марина</span>
+                  <div style="color:var(--muted);font-size:.75rem;margin-top:1px;">Lipari, Porto Pignataro</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Day VI -->
-      <div class="day">
-        <div class="day-dot">VI</div>
-        <div class="day-card">
-          <div class="day-meta-row">
-            <span class="day-date">2 октября · пятница</span>
-            <span class="day-distance">≈22 NM · ~4 ч + заправка</span>
+          <div class="day">
+            <div class="day-dot">VI</div>
+            <div class="day-card">
+              <div class="day-meta-row">
+                <span class="day-date">2 октября · пятница</span>
+                <span class="day-distance">≈22 NM · ~4 ч + заправка</span>
+              </div>
+              <h3 class="day-route">Lipari → Capo d'Orlando</h3>
+              <p class="day-title">Возвращение и сдача лодки</p>
+              <ul class="day-program">
+                <li>Выход 09:00–10:00</li>
+                <li>Финальная заправка топливом по пути</li>
+                <li>Уборка на лодке, упаковка вещей</li>
+              </ul>
+              <div class="day-alert">⚠ Сдача лодки до 18:00 — жёсткий дедлайн</div>
+            </div>
           </div>
-          <h3 class="day-route">Lipari → Capo d'Orlando</h3>
-          <p class="day-title">Возвращение и сдача лодки</p>
-          <ul class="day-program">
-            <li>Выход 09:00–10:00</li>
-            <li>Финальная заправка топливом по пути</li>
-            <li>Уборка на лодке, упаковка вещей</li>
-          </ul>
-          <div class="day-alert">⚠ Сдача лодки до 18:00 — жёсткий дедлайн, заложить запас на очередь на заправке</div>
+
         </div>
       </div>
-
-    </div><!-- /timeline -->
+    </section>
   </div>
-</section>
+</div>
 
-<!-- MAP -->
-<section id="map-section" style="padding:0; background:var(--cream-d);">
-  <div class="container map-header">
-    <p class="section-label">Визуализация</p>
-    <h2 class="section-title">Карта маршрута</h2>
-    <div class="section-rule"></div>
+<!-- ── TAB: МАРИНЫ ─────────────────────────── -->
+<div id="tab-marinas" class="tab-panel">
+  <div class="tab-content">
+    <section>
+      <div class="container--wide">
+        <p class="section-label">Стоянки</p>
+        <h2 class="section-title">Марины</h2>
+        <div class="section-rule"></div>
+
+        <div class="marinas-list">
+
+          <!-- VULCANO -->
+          <div class="marina-detail" id="marina-vulcano">
+            <div class="md-header">
+              <div>
+                <div class="md-name">Marina Baia Levante</div>
+                <div class="md-island">Vulcano · Porto di Levante</div>
+              </div>
+              <span class="md-day-badge">День I · 27.09</span>
+            </div>
+            <div class="md-body">
+              <div class="md-badges">
+                <span class="badge badge-marina">Марина</span>
+                <span class="badge badge-ok">✓ Подтверждено</span>
+              </div>
+              <div class="md-price-wrap">
+                <div class="md-price">~140 €</div>
+                <div class="md-price-note">тариф 2024, для лодок до 12 м · для 15 м выше на 20–40%</div>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Контакты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📡</i><span>VHF канал 14</span></li>
+                  <li><i class="ci">📞</i><a href="tel:+393939151901">+39 393 915 1901</a></li>
+                  <li><i class="ci">✉</i><a href="mailto:info@baialevante.it">info@baialevante.it</a></li>
+                  <li><i class="ci">🌐</i><a href="https://www.baialevante.it" target="_blank">baialevante.it</a></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Расписание</div>
+                <ul class="contact-list">
+                  <li><i class="ci">🕐</i><span>Check-in: 14:30–18:00 (день заезда), до 20:00 в остальные дни</span></li>
+                  <li><i class="ci">🕐</i><span>Check-out: до 12:00</span></li>
+                  <li><i class="ci">⚡</i><span>Генераторы: 09:00–22:00</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Координаты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📍</i><span>38.413°N, 14.962°E</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Заметки</div>
+                <ul class="notes-list">
+                  <li>Запросить S.U.T. (Support Utility Tender) для ассистанса при швартовке</li>
+                  <li>Sailing licence привезти на ресепшен в день заезда</li>
+                  <li>Электричество и вода включены для лодок до 12 м</li>
+                  <li>Для больших лодок — 1,90 €/кВт</li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Документы брони</div>
+                <div id="gallery-vulcano" class="doc-gallery"></div>
+                <label class="doc-upload-btn">
+                  <input type="file" accept="image/*,application/pdf" multiple onchange="addDocs('vulcano', this)">
+                  + Загрузить скриншоты / файлы
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANAREA -->
+          <div class="marina-detail" id="marina-panarea">
+            <div class="md-header">
+              <div>
+                <div class="md-name">Sea Panarea</div>
+                <div class="md-island">Panarea · Iditella (северная сторона)</div>
+              </div>
+              <span class="md-day-badge">День II · 28.09</span>
+            </div>
+            <div class="md-body">
+              <div class="md-badges">
+                <span class="badge badge-buoy">Буй</span>
+                <span class="badge badge-ok">✓ Подтверждено</span>
+              </div>
+              <div class="md-price-wrap">
+                <div class="md-price">100 €</div>
+                <div class="md-price-note">шаттл с буя в порт San Pietro включён · охрана H24</div>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Контакты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">✉</i><a href="mailto:sea.panarea@gmail.com">sea.panarea@gmail.com</a></li>
+                  <li><i class="ci">🌐</i><a href="https://www.seapanarea.com" target="_blank">seapanarea.com</a></li>
+                  <li><i class="ci">👤</i><span>Контакт: <strong>Claudia</strong></span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Координаты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📍</i><span>38.650°N, 15.075°E · Iditella</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Заметки</div>
+                <ul class="notes-list">
+                  <li>Буй + шаттл. На якорь не становиться</li>
+                  <li>Якорный огонь обязательно ночью</li>
+                  <li>25.09 — написать Клаудии для проверки прогноза погоды</li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Документы брони</div>
+                <div id="gallery-panarea" class="doc-gallery"></div>
+                <label class="doc-upload-btn">
+                  <input type="file" accept="image/*,application/pdf" multiple onchange="addDocs('panarea', this)">
+                  + Загрузить скриншоты / файлы
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- STROMBOLI -->
+          <div class="marina-detail" id="marina-stromboli">
+            <div class="md-header">
+              <div>
+                <div class="md-name">Marina del Gabbiano</div>
+                <div class="md-island">Stromboli · Punta Lena</div>
+              </div>
+              <span class="md-day-badge">День III · 29.09</span>
+            </div>
+            <div class="md-body">
+              <div class="md-badges">
+                <span class="badge badge-buoy">Буй</span>
+                <span class="badge" style="background:rgba(201,146,74,.12);color:#7A5520;">✓ Подтверждено + депозит 90 €</span>
+              </div>
+              <div class="md-price-wrap">
+                <div class="md-price">100 €</div>
+                <div class="md-price-note">тариф 2024, до 12 м · депозит 90 € уже отправлен</div>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Контакты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📡</i><span>VHF канал 9</span></li>
+                  <li><i class="ci">📞</i><a href="tel:+393773899607">+39 377 389 9607</a></li>
+                  <li><i class="ci">✉</i><a href="mailto:info@marinadelgabbiano.it">info@marinadelgabbiano.it</a></li>
+                  <li><i class="ci">🌐</i><a href="https://www.marinadelgabbiano.it" target="_blank">marinadelgabbiano.it</a></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Расписание</div>
+                <ul class="contact-list">
+                  <li><i class="ci">🕐</i><span>Check-in: 09:00–19:00 · прийти не позже 19:00</span></li>
+                  <li><i class="ci">🕐</i><span>Check-out: 06:00–12:00 (выход на рассвет ~06:00)</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Координаты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📍</i><span>38.794°N, 15.234°E · ~600 м к северу от порта</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Депозит</div>
+                <ul class="notes-list">
+                  <li>90 € переведено: Blu Fenix Srl (Montepaschi di Siena)</li>
+                  <li>IBAN: IT58N0103026001000001339784</li>
+                  <li>Назначение: «CAPARRA 29 Settembre – Vladimir Ageev»</li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Документы брони</div>
+                <div id="gallery-stromboli" class="doc-gallery"></div>
+                <label class="doc-upload-btn">
+                  <input type="file" accept="image/*,application/pdf" multiple onchange="addDocs('stromboli', this)">
+                  + Загрузить скриншоты / файлы
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- SALINA -->
+          <div class="marina-detail" id="marina-salina">
+            <div class="md-header">
+              <div>
+                <div class="md-name">Marina Salina (Marinedì)</div>
+                <div class="md-island">Salina · Santa Marina Salina</div>
+              </div>
+              <span class="md-day-badge">День IV · 30.09</span>
+            </div>
+            <div class="md-body">
+              <div class="md-badges">
+                <span class="badge badge-marina">Марина</span>
+                <span class="badge badge-ok">✓ Подтверждено (Navily)</span>
+              </div>
+              <div class="md-price-wrap">
+                <div class="md-price">~165 €</div>
+                <div class="md-price-note">тариф 2024 · вода, электричество, душ включены</div>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Контакты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">🌐</i><a href="https://marinedi.com/en/marina-salina/" target="_blank">marinedi.com</a></li>
+                  <li><i class="ci">🔗</i><a href="https://www.navily.com/port/marina-salina-marinedi/203" target="_blank">Profilo Navily</a></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Координаты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📍</i><span>38°33.37'N, 14°52.30'E (38.5562°N, 14.8717°E)</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Заметки</div>
+                <ul class="notes-list">
+                  <li>Хорошее место заправиться топливом и водой</li>
+                  <li>После двух ночей на буях — полноценный комфорт</li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Документы брони</div>
+                <div id="gallery-salina" class="doc-gallery"></div>
+                <label class="doc-upload-btn">
+                  <input type="file" accept="image/*,application/pdf" multiple onchange="addDocs('salina', this)">
+                  + Загрузить скриншоты / файлы
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- LIPARI -->
+          <div class="marina-detail" id="marina-lipari">
+            <div class="md-header">
+              <div>
+                <div class="md-name">EOLMARE Marina Resort</div>
+                <div class="md-island">Lipari · Porto Pignataro</div>
+              </div>
+              <span class="md-day-badge">День V · 01.10</span>
+            </div>
+            <div class="md-body">
+              <div class="md-badges">
+                <span class="badge badge-marina">Марина</span>
+                <span class="badge badge-ok">✓ Подтверждено (Navily)</span>
+              </div>
+              <div class="md-price-wrap">
+                <div class="md-price">70 €</div>
+                <div class="md-price-note">тариф 2024 · электричество и вода включены</div>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Контакты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📡</i><span>VHF канал 9</span></li>
+                  <li><i class="ci">📞</i><a href="tel:+390909814233">+39 090 981 4233</a></li>
+                  <li><i class="ci">✉</i><a href="mailto:info@eolmare.com">info@eolmare.com</a></li>
+                  <li><i class="ci">🌐</i><a href="https://www.eolmare.com" target="_blank">eolmare.com</a></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Расписание</div>
+                <ul class="contact-list">
+                  <li><i class="ci">🕐</i><span>Открыто: 08:00–20:00</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Координаты</div>
+                <ul class="contact-list">
+                  <li><i class="ci">📍</i><span>38.474°N, 14.965°E</span></li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Заметки</div>
+                <ul class="notes-list">
+                  <li>Бесплатный трансфер в центр Lipari</li>
+                  <li>Последняя ночь перед финальным переходом</li>
+                </ul>
+              </div>
+              <div class="md-section">
+                <div class="md-section-title">Документы брони</div>
+                <div id="gallery-lipari" class="doc-gallery"></div>
+                <label class="doc-upload-btn">
+                  <input type="file" accept="image/*,application/pdf" multiple onchange="addDocs('lipari', this)">
+                  + Загрузить скриншоты / файлы
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /marinas-list -->
+
+        <!-- Boat card -->
+        <div class="boat-card">
+          <div class="boat-title">Sun Odyssey 490 «Chaos»</div>
+          <div class="boat-row"><span class="bk">Год</span><span class="bv">2019</span></div>
+          <div class="boat-row"><span class="bk">LOA</span><span class="bv">14.94 м</span></div>
+          <div class="boat-row"><span class="bk">Beam</span><span class="bv">4.49 м</span></div>
+          <div class="boat-row"><span class="bk">Осадка</span><span class="bv">2.28 м</span></div>
+          <div class="boat-row"><span class="bk">Каюты</span><span class="bv">5 кают · 12 мест</span></div>
+          <div class="boat-row"><span class="bk">WC</span><span class="bv">3 + 1 bow</span></div>
+          <div class="boat-row"><span class="bk">Вода</span><span class="bv">~615 л (~50 л/чел/день)</span></div>
+          <div class="boat-row"><span class="bk">Топливо</span><span class="bv">~240 л</span></div>
+          <div class="boat-row"><span class="bk">Чартер</span><span class="bv">Spartivento · Capo d'Orlando</span></div>
+          <div class="boat-row"><span class="bk">Капитан</span><span class="bv">Vladimir Ageev</span></div>
+        </div>
+
+      </div>
+    </section>
+    <footer>
+      <div>Sun Odyssey 490 «Chaos» · Spartivento · Capo d'Orlando · 27.09–02.10.2026</div>
+      <div class="footer-motto">Buon vento e mare calmo ✦</div>
+    </footer>
   </div>
-  <div id="leaflet-map"></div>
-</section>
+</div>
 
-<!-- MARINAS -->
-<section id="marinas">
-  <div class="container--wide">
-    <p class="section-label">Стоянки</p>
-    <h2 class="section-title">Марины</h2>
-    <div class="section-rule"></div>
-
-    <div class="marinas-grid">
-
-      <!-- Vulcano -->
-      <div class="marina-card">
-        <div class="marina-head">
-          <div>
-            <div class="marina-name">Marina Baia Levante</div>
-            <div class="marina-island">Vulcano · Porto di Levante</div>
+<!-- ── TAB: БЮДЖЕТ ─────────────────────────── -->
+<div id="tab-budget" class="tab-panel">
+  <div class="tab-content">
+    <section>
+      <div class="container">
+        <p class="section-label">Расходы</p>
+        <h2 class="section-title">Бюджет</h2>
+        <div class="section-rule"></div>
+        <div class="budget-grid">
+          <div class="budget-card">
+            <div class="bc-title">Чартер</div>
+            <table>
+              <tr><td>Sun Odyssey 490 «Chaos», 6 дней</td><td class="amount">2 754 €</td></tr>
+              <tr><td>Обязательные доплаты<br><small style="color:var(--muted)">бельё, газ, уборка, тузик</small></td><td class="amount">620 €</td></tr>
+              <tr class="total"><td>Итого чартер</td><td class="amount">3 374 €</td></tr>
+            </table>
+            <div class="bc-note">Залог (блокировка карты, возвратный): 3 500 €</div>
           </div>
-          <span class="marina-day-badge">День I · 27.09</span>
-        </div>
-        <div>
-          <span class="status-badge">✓ Подтверждено</span>
-          <span class="overnight-type type-marina" style="margin-left:6px;">марина</span>
-        </div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <span class="marina-price">~140 €</span>
-          <span class="marina-price-note">тариф 2024, до 12 м</span>
-        </div>
-        <ul class="marina-contacts">
-          <li><i class="mc-icon">📡</i><span>VHF канал 14</span></li>
-          <li><i class="mc-icon">📞</i><a href="tel:+393939151901">+39 393 915 1901</a></li>
-          <li><i class="mc-icon">✉</i><a href="mailto:info@baialevante.it">info@baialevante.it</a></li>
-          <li><i class="mc-icon">🌐</i><a href="https://www.baialevante.it" target="_blank">baialevante.it</a></li>
-          <li><i class="mc-icon">🕐</i><span>Check-in 14:30–18:00 · Check-out до 12:00</span></li>
-        </ul>
-        <ul class="marina-notes">
-          <li>Запросить S.U.T. для ассистанса при швартовке</li>
-          <li>Sailing licence привезти на ресепшен в день заезда</li>
-          <li>Электричество и вода включены (до 12 м)</li>
-          <li>Генераторы 09:00–22:00</li>
-        </ul>
-        <label class="marina-screenshots" onclick="this.querySelector('input').click()">
-          <input type="file" accept="image/*" multiple onchange="addImages(this, 'vulcano-imgs')">
-          <div id="vulcano-imgs" class="img-gallery"></div>
-          <span class="upload-hint">+ Добавить скриншоты подтверждения</span>
-        </label>
-      </div>
-
-      <!-- Panarea -->
-      <div class="marina-card">
-        <div class="marina-head">
-          <div>
-            <div class="marina-name">Sea Panarea</div>
-            <div class="marina-island">Panarea · Iditella (северная сторона)</div>
+          <div class="budget-card">
+            <div class="bc-title">Стоянки</div>
+            <table>
+              <thead><tr><th>Дата</th><th>Марина</th><th style="text-align:right">€</th></tr></thead>
+              <tbody>
+                <tr><td>27.09</td><td>Baia Levante (Vulcano)</td><td class="amount">~140</td></tr>
+                <tr><td>28.09</td><td>Sea Panarea (буй)</td><td class="amount">100</td></tr>
+                <tr><td>29.09</td><td>Del Gabbiano (буй)</td><td class="amount">100</td></tr>
+                <tr><td>30.09</td><td>Marina Salina (Marinedì)</td><td class="amount">~165</td></tr>
+                <tr><td>01.10</td><td>EOLMARE (Lipari)</td><td class="amount">70</td></tr>
+                <tr class="total"><td colspan="2">Итого стоянки</td><td class="amount">~575</td></tr>
+              </tbody>
+            </table>
+            <div class="bc-note">Цены 2024 для лодок до 12 м. Для 490 (15 м) может быть на 20–40% выше.</div>
           </div>
-          <span class="marina-day-badge">День II · 28.09</span>
-        </div>
-        <div>
-          <span class="status-badge">✓ Подтверждено</span>
-          <span class="overnight-type type-buoy" style="margin-left:6px;">буй</span>
-        </div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <span class="marina-price">100 €</span>
-          <span class="marina-price-note">шаттл в порт включён</span>
-        </div>
-        <ul class="marina-contacts">
-          <li><i class="mc-icon">✉</i><a href="mailto:sea.panarea@gmail.com">sea.panarea@gmail.com</a></li>
-          <li><i class="mc-icon">🌐</i><a href="https://www.seapanarea.com" target="_blank">seapanarea.com</a></li>
-          <li><i class="mc-icon">👤</i><span>Контакт: Claudia</span></li>
-          <li><i class="mc-icon">🕐</i><span>Охрана H24</span></li>
-        </ul>
-        <ul class="marina-notes">
-          <li>Шаттл с буя в порт San Pietro включён</li>
-          <li>Якорный огонь обязательно ночью</li>
-          <li>25.09 — написать Клаудии для проверки погоды</li>
-        </ul>
-        <label class="marina-screenshots" onclick="this.querySelector('input').click()">
-          <input type="file" accept="image/*" multiple onchange="addImages(this, 'panarea-imgs')">
-          <div id="panarea-imgs" class="img-gallery"></div>
-          <span class="upload-hint">+ Добавить скриншоты подтверждения</span>
-        </label>
-      </div>
-
-      <!-- Stromboli -->
-      <div class="marina-card">
-        <div class="marina-head">
-          <div>
-            <div class="marina-name">Marina del Gabbiano</div>
-            <div class="marina-island">Stromboli · Punta Lena</div>
+          <div class="budget-card" style="grid-column:1/-1">
+            <div class="bc-title">Прочие расходы</div>
+            <table>
+              <tr><td>Tourist tax (1–3 €/чел/ночь × 12 чел)</td><td class="amount">~100–150 €</td></tr>
+              <tr><td>Топливо (~200 л за неделю)</td><td class="amount">~350–400 €</td></tr>
+              <tr><td>Провиант (закупка в Capo d'Orlando)</td><td class="amount">по договорённости</td></tr>
+            </table>
           </div>
-          <span class="marina-day-badge">День III · 29.09</span>
         </div>
-        <div>
-          <span class="status-badge status-badge-dep">✓ Подтверждено + депозит 90 €</span>
-          <span class="overnight-type type-buoy" style="margin-left:6px;">буй</span>
-        </div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <span class="marina-price">100 €</span>
-          <span class="marina-price-note">тариф 2024, до 12 м</span>
-        </div>
-        <ul class="marina-contacts">
-          <li><i class="mc-icon">📡</i><span>VHF канал 9</span></li>
-          <li><i class="mc-icon">📞</i><a href="tel:+393773899607">+39 377 389 9607</a></li>
-          <li><i class="mc-icon">✉</i><a href="mailto:info@marinadelgabbiano.it">info@marinadelgabbiano.it</a></li>
-          <li><i class="mc-icon">🌐</i><a href="https://www.marinadelgabbiano.it" target="_blank">marinadelgabbiano.it</a></li>
-          <li><i class="mc-icon">🕐</i><span>Check-in 09:00–19:00 · Check-out 06:00–12:00</span></li>
-        </ul>
-        <ul class="marina-notes">
-          <li>Прийти не позже 19:00</li>
-          <li>Lounge Bar на берегу — можно поужинать</li>
-          <li>Якорный огонь обязательно</li>
-          <li>Депозит: 90 € отправлен (Blu Fenix Srl)</li>
-        </ul>
-        <label class="marina-screenshots" onclick="this.querySelector('input').click()">
-          <input type="file" accept="image/*" multiple onchange="addImages(this, 'stromboli-imgs')">
-          <div id="stromboli-imgs" class="img-gallery"></div>
-          <span class="upload-hint">+ Добавить скриншоты подтверждения</span>
-        </label>
       </div>
-
-      <!-- Salina -->
-      <div class="marina-card">
-        <div class="marina-head">
-          <div>
-            <div class="marina-name">Marina Salina (Marinedì)</div>
-            <div class="marina-island">Salina · Santa Marina Salina</div>
-          </div>
-          <span class="marina-day-badge">День IV · 30.09</span>
-        </div>
-        <div>
-          <span class="status-badge">✓ Подтверждено через Navily</span>
-          <span class="overnight-type type-marina" style="margin-left:6px;">марина</span>
-        </div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <span class="marina-price">~165 €</span>
-          <span class="marina-price-note">тариф 2024</span>
-        </div>
-        <ul class="marina-contacts">
-          <li><i class="mc-icon">🌐</i><a href="https://marinedi.com/en/marina-salina/" target="_blank">marinedi.com</a></li>
-          <li><i class="mc-icon">📍</i><span>38°33.37'N, 14°52.30'E</span></li>
-        </ul>
-        <ul class="marina-notes">
-          <li>Полноценная марина — вода, электричество, душ</li>
-          <li>Хорошее место заправиться топливом и водой</li>
-          <li>После двух ночей на буях — комфорт</li>
-        </ul>
-        <label class="marina-screenshots" onclick="this.querySelector('input').click()">
-          <input type="file" accept="image/*" multiple onchange="addImages(this, 'salina-imgs')">
-          <div id="salina-imgs" class="img-gallery"></div>
-          <span class="upload-hint">+ Добавить скриншоты подтверждения</span>
-        </label>
-      </div>
-
-      <!-- Lipari -->
-      <div class="marina-card">
-        <div class="marina-head">
-          <div>
-            <div class="marina-name">EOLMARE Marina Resort</div>
-            <div class="marina-island">Lipari · Porto Pignataro</div>
-          </div>
-          <span class="marina-day-badge">День V · 01.10</span>
-        </div>
-        <div>
-          <span class="status-badge">✓ Подтверждено через Navily</span>
-          <span class="overnight-type type-marina" style="margin-left:6px;">марина</span>
-        </div>
-        <div style="display:flex;align-items:baseline;gap:8px;">
-          <span class="marina-price">70 €</span>
-          <span class="marina-price-note">тариф 2024, до 12 м</span>
-        </div>
-        <ul class="marina-contacts">
-          <li><i class="mc-icon">📡</i><span>VHF канал 9</span></li>
-          <li><i class="mc-icon">📞</i><a href="tel:+390909814233">+39 090 981 4233</a></li>
-          <li><i class="mc-icon">✉</i><a href="mailto:info@eolmare.com">info@eolmare.com</a></li>
-          <li><i class="mc-icon">🌐</i><a href="https://www.eolmare.com" target="_blank">eolmare.com</a></li>
-          <li><i class="mc-icon">🕐</i><span>08:00–20:00</span></li>
-        </ul>
-        <ul class="marina-notes">
-          <li>Электричество и вода включены</li>
-          <li>Бесплатный трансфер в центр Lipari</li>
-        </ul>
-        <label class="marina-screenshots" onclick="this.querySelector('input').click()">
-          <input type="file" accept="image/*" multiple onchange="addImages(this, 'lipari-imgs')">
-          <div id="lipari-imgs" class="img-gallery"></div>
-          <span class="upload-hint">+ Добавить скриншоты подтверждения</span>
-        </label>
-      </div>
-
-    </div><!-- /marinas-grid -->
-
-    <!-- Boat info -->
-    <div style="margin-top:40px;">
-      <div class="boat-card">
-        <div class="boat-card-title">Sun Odyssey 490 «Chaos»</div>
-        <div class="boat-row"><span class="boat-key">Год</span><span class="boat-val">2019</span></div>
-        <div class="boat-row"><span class="boat-key">LOA</span><span class="boat-val">14.94 м</span></div>
-        <div class="boat-row"><span class="boat-key">Beam</span><span class="boat-val">4.49 м</span></div>
-        <div class="boat-row"><span class="boat-key">Осадка</span><span class="boat-val">2.28 м</span></div>
-        <div class="boat-row"><span class="boat-key">Каюты</span><span class="boat-val">5 кают · 12 мест</span></div>
-        <div class="boat-row"><span class="boat-key">WC</span><span class="boat-val">3 + 1 bow</span></div>
-        <div class="boat-row"><span class="boat-key">Вода</span><span class="boat-val">~615 л (~50 л/чел/день)</span></div>
-        <div class="boat-row"><span class="boat-key">Топливо</span><span class="boat-val">~240 л</span></div>
-        <div class="boat-row"><span class="boat-key">Чартер</span><span class="boat-val">Spartivento · Capo d'Orlando</span></div>
-        <div class="boat-row"><span class="boat-key">Капитан</span><span class="boat-val">Vladimir Ageev</span></div>
-      </div>
-    </div>
-
+    </section>
   </div>
-</section>
+</div>
 
-<!-- BUDGET -->
-<section id="budget" style="background:var(--cream-d);">
-  <div class="container">
-    <p class="section-label">Расходы</p>
-    <h2 class="section-title">Бюджет</h2>
-    <div class="section-rule"></div>
+<!-- ── TAB: ЧЕК-ЛИСТЫ ─────────────────────── -->
+<div id="tab-checklists" class="tab-panel">
+  <div class="tab-content">
+    <section>
+      <div class="container">
+        <p class="section-label">Подготовка</p>
+        <h2 class="section-title">Чек-листы</h2>
+        <div class="section-rule"></div>
+        <div class="cl-groups">
 
-    <div class="budget-grid">
+          <div class="cl-group open" id="clg-docs">
+            <div class="cl-head" onclick="toggleCL(this)">
+              <div class="cl-left"><span class="cl-icon">📋</span><span class="cl-title">Документы и финансы</span></div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="cl-count" id="clc-docs"></span>
+                <span class="cl-arrow">▼</span>
+              </div>
+            </div>
+            <div class="cl-body">
+              <label class="cl-item" data-id="docs-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Skipper licence + VHF licence капитана</span></label>
+              <label class="cl-item" data-id="docs-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Sailing licence (привезти на ресепшен в Baia Levante)</span></label>
+              <label class="cl-item" data-id="docs-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Карта с лимитом 4000 € для залога 3500 €</span></label>
+              <label class="cl-item" data-id="docs-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Все подтверждения броней — в одной папке/чате</span></label>
+              <label class="cl-item" data-id="docs-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Паспорта всех на борту</span></label>
+            </div>
+          </div>
 
-      <div class="budget-card">
-        <div class="budget-card-title">Чартер</div>
-        <table>
-          <tr><td>Sun Odyssey 490 «Chaos», 6 дней</td><td class="amount">2 754 €</td></tr>
-          <tr><td>Обязательные доплаты<br><small style="color:var(--muted)">бельё, газ, уборка, тузик</small></td><td class="amount">620 €</td></tr>
-          <tr class="total"><td>Итого чартер</td><td class="amount">3 374 €</td></tr>
-        </table>
-        <div class="budget-note">Залог (блокировка карты, возвратный): 3 500 €</div>
+          <div class="cl-group" id="clg-coord">
+            <div class="cl-head" onclick="toggleCL(this)">
+              <div class="cl-left"><span class="cl-icon">📅</span><span class="cl-title">Координация с маринами</span></div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="cl-count" id="clc-coord"></span>
+                <span class="cl-arrow">▼</span>
+              </div>
+            </div>
+            <div class="cl-body">
+              <label class="cl-item" data-id="coord-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">25.09 — написать Клаудии (Sea Panarea) для проверки погоды</span></label>
+              <label class="cl-item" data-id="coord-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Уточнить точное время восхода 30.09 на Стромболи</span></label>
+              <label class="cl-item" data-id="coord-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Уточнить у Spartivento: детские спасжилеты на 4 ребёнка</span></label>
+              <label class="cl-item" data-id="coord-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Уточнить осадку лодки (2.28 м или shallow keel)</span></label>
+            </div>
+          </div>
+
+          <div class="cl-group" id="clg-team">
+            <div class="cl-head" onclick="toggleCL(this)">
+              <div class="cl-left"><span class="cl-icon">⛵</span><span class="cl-title">Команда (до старта)</span></div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="cl-count" id="clc-team"></span>
+                <span class="cl-arrow">▼</span>
+              </div>
+            </div>
+            <div class="cl-body">
+              <label class="cl-item" data-id="team-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Распределить каюты (4 семьи + одиночка)</span></label>
+              <label class="cl-item" data-id="team-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Договориться про еду: общий стол или по семьям</span></label>
+              <label class="cl-item" data-id="team-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Закупочный список (большая закупка в Capo d'Orlando)</span></label>
+              <label class="cl-item" data-id="team-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Кто встаёт на рассвет 30.09 — извержения Стромболи</span></label>
+            </div>
+          </div>
+
+          <div class="cl-group" id="clg-gear">
+            <div class="cl-head" onclick="toggleCL(this)">
+              <div class="cl-left"><span class="cl-icon">🎒</span><span class="cl-title">Снаряжение (привезти)</span></div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="cl-count" id="clc-gear"></span>
+                <span class="cl-arrow">▼</span>
+              </div>
+            </div>
+            <div class="cl-body">
+              <label class="cl-item" data-id="gear-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Детские спасжилеты по размерам (если нет на лодке)</span></label>
+              <label class="cl-item" data-id="gear-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Маски, трубки, ласты — Lisca Bianca (фумаролы)</span></label>
+              <label class="cl-item" data-id="gear-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Powerbanks (на буях электричества нет)</span></label>
+              <label class="cl-item" data-id="gear-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Свои полотенца на пляж</span></label>
+              <label class="cl-item" data-id="gear-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Защита от солнца: крем SPF 50+, шляпы, очки</span></label>
+              <label class="cl-item" data-id="gear-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Лёгкие свитера/ветровки — в море прохладно вечером</span></label>
+              <label class="cl-item" data-id="gear-6"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Морская соль для готовки (вода опреснённая)</span></label>
+              <label class="cl-item" data-id="gear-7"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Аптечка: морская болезнь, детские лекарства, общая</span></label>
+              <label class="cl-item" data-id="gear-8"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Налобный фонарик капитану для ночных манёвров</span></label>
+            </div>
+          </div>
+
+          <div class="cl-group" id="clg-rules">
+            <div class="cl-head" onclick="toggleCL(this)">
+              <div class="cl-left"><span class="cl-icon">📌</span><span class="cl-title">Правила на борту</span></div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span class="cl-count" id="clc-rules"></span>
+                <span class="cl-arrow">▼</span>
+              </div>
+            </div>
+            <div class="cl-body">
+              <label class="cl-item" data-id="rules-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Воду экономить: 50 л/чел/день на 12 чел — впритык</span></label>
+              <label class="cl-item" data-id="rules-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Душиться на берегу в маринах (Vulcano, Salina, Lipari)</span></label>
+              <label class="cl-item" data-id="rules-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Туалет сливать только в открытом море между островов</span></label>
+              <label class="cl-item" data-id="rules-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">На бую — якорный огонь обязательно ночью</span></label>
+              <label class="cl-item" data-id="rules-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">На тузике дети только в спасжилетах</span></label>
+              <label class="cl-item" data-id="rules-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Звонок в марину за 20 мин до подхода</span></label>
+            </div>
+          </div>
+
+        </div>
       </div>
-
-      <div class="budget-card">
-        <div class="budget-card-title">Стоянки</div>
-        <table>
-          <thead><tr><th>Дата</th><th>Марина</th><th style="text-align:right">€</th></tr></thead>
-          <tbody>
-            <tr><td>27.09</td><td>Baia Levante (Vulcano)</td><td class="amount">~140</td></tr>
-            <tr><td>28.09</td><td>Sea Panarea (буй)</td><td class="amount">100</td></tr>
-            <tr><td>29.09</td><td>Marina del Gabbiano (буй)</td><td class="amount">100</td></tr>
-            <tr><td>30.09</td><td>Marina Salina (Marinedì)</td><td class="amount">~165</td></tr>
-            <tr><td>01.10</td><td>EOLMARE (Lipari)</td><td class="amount">70</td></tr>
-            <tr class="total"><td colspan="2">Итого стоянки</td><td class="amount">~575</td></tr>
-          </tbody>
-        </table>
-        <div class="budget-note">Цены 2024 года, для лодок до 12 м. Для 490 (15 м) тарифы могут быть на 20–40% выше.</div>
-      </div>
-
-      <div class="budget-card" style="grid-column: 1 / -1;">
-        <div class="budget-card-title">Прочие расходы</div>
-        <table>
-          <tr><td>Tourist tax (1–3 €/чел/ночь × 12 чел)</td><td class="amount">~100–150 €</td></tr>
-          <tr><td>Топливо (~200 л за неделю)</td><td class="amount">~350–400 €</td></tr>
-          <tr><td>Провиант (большая закупка в Capo d'Orlando)</td><td class="amount">по договорённости</td></tr>
-        </table>
-      </div>
-
-    </div>
+    </section>
   </div>
-</section>
+</div>
 
-<!-- CHECKLISTS -->
-<section id="checklists">
-  <div class="container">
-    <p class="section-label">Подготовка</p>
-    <h2 class="section-title">Чек-листы</h2>
-    <div class="section-rule"></div>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">×</button>
+  <img id="lb-img" src="" alt="">
+</div>
 
-    <div class="checklist-groups">
-
-      <div class="cl-group open" id="cl-docs">
-        <div class="cl-head" onclick="toggleCL(this)">
-          <div class="cl-head-left">
-            <span class="cl-icon">📋</span>
-            <span class="cl-title">Документы и финансы</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="cl-count" id="cl-docs-count"></span>
-            <span class="cl-arrow">▼</span>
-          </div>
-        </div>
-        <div class="cl-body">
-          <label class="cl-item" data-id="docs-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Skipper licence + VHF licence капитана</span></label>
-          <label class="cl-item" data-id="docs-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Sailing licence (привезти на ресепшен в Baia Levante)</span></label>
-          <label class="cl-item" data-id="docs-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Карта с лимитом 4000 € для залога 3500 €</span></label>
-          <label class="cl-item" data-id="docs-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Все подтверждения броней — в одной папке/чате</span></label>
-          <label class="cl-item" data-id="docs-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Паспорта всех на борту</span></label>
-        </div>
-      </div>
-
-      <div class="cl-group" id="cl-coord">
-        <div class="cl-head" onclick="toggleCL(this)">
-          <div class="cl-head-left">
-            <span class="cl-icon">📅</span>
-            <span class="cl-title">Координация с маринами (по датам)</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="cl-count" id="cl-coord-count"></span>
-            <span class="cl-arrow">▼</span>
-          </div>
-        </div>
-        <div class="cl-body">
-          <label class="cl-item" data-id="coord-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">25.09 — написать Клаудии (Sea Panarea) для проверки погоды</span></label>
-          <label class="cl-item" data-id="coord-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Уточнить точное время восхода 30.09 на Стромболи</span></label>
-          <label class="cl-item" data-id="coord-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Уточнить у Spartivento: детские спасжилеты на 4 ребёнка</span></label>
-          <label class="cl-item" data-id="coord-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Уточнить осадку лодки (2.28 м или shallow keel)</span></label>
-        </div>
-      </div>
-
-      <div class="cl-group" id="cl-team">
-        <div class="cl-head" onclick="toggleCL(this)">
-          <div class="cl-head-left">
-            <span class="cl-icon">⛵</span>
-            <span class="cl-title">Команда (до старта)</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="cl-count" id="cl-team-count"></span>
-            <span class="cl-arrow">▼</span>
-          </div>
-        </div>
-        <div class="cl-body">
-          <label class="cl-item" data-id="team-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Распределить каюты (4 семьи + одиночка)</span></label>
-          <label class="cl-item" data-id="team-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Договориться про еду: общий стол или по семьям</span></label>
-          <label class="cl-item" data-id="team-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Закупочный список (большая закупка в Capo d'Orlando)</span></label>
-          <label class="cl-item" data-id="team-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Кто встаёт на рассвет в день 4 — извержения Стромболи</span></label>
-        </div>
-      </div>
-
-      <div class="cl-group" id="cl-gear">
-        <div class="cl-head" onclick="toggleCL(this)">
-          <div class="cl-head-left">
-            <span class="cl-icon">🎒</span>
-            <span class="cl-title">Снаряжение (привезти)</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="cl-count" id="cl-gear-count"></span>
-            <span class="cl-arrow">▼</span>
-          </div>
-        </div>
-        <div class="cl-body">
-          <label class="cl-item" data-id="gear-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Детские спасжилеты по размерам (если нет на лодке)</span></label>
-          <label class="cl-item" data-id="gear-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Маски, трубки, ласты — Lisca Bianca (фумаролы)</span></label>
-          <label class="cl-item" data-id="gear-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Powerbanks (на буях электричества нет)</span></label>
-          <label class="cl-item" data-id="gear-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Свои полотенца на пляж</span></label>
-          <label class="cl-item" data-id="gear-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Защита от солнца: крем SPF 50+, шляпы, очки</span></label>
-          <label class="cl-item" data-id="gear-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Лёгкие свитера/ветровки — в море прохладно вечером</span></label>
-          <label class="cl-item" data-id="gear-6"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Морская соль для готовки (вода опреснённая)</span></label>
-          <label class="cl-item" data-id="gear-7"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Аптечка: морская болезнь, детские лекарства, общая</span></label>
-          <label class="cl-item" data-id="gear-8"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Налобный фонарик капитану для ночных манёвров</span></label>
-        </div>
-      </div>
-
-      <div class="cl-group" id="cl-rules">
-        <div class="cl-head" onclick="toggleCL(this)">
-          <div class="cl-head-left">
-            <span class="cl-icon">📌</span>
-            <span class="cl-title">Правила на борту (помнить)</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <span class="cl-count" id="cl-rules-count"></span>
-            <span class="cl-arrow">▼</span>
-          </div>
-        </div>
-        <div class="cl-body">
-          <label class="cl-item" data-id="rules-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Воду экономить: 50 л/чел/день на 12 чел — впритык</span></label>
-          <label class="cl-item" data-id="rules-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Душиться на берегу в маринах (Vulcano, Salina, Lipari)</span></label>
-          <label class="cl-item" data-id="rules-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Туалет сливать только в открытом море между островов</span></label>
-          <label class="cl-item" data-id="rules-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">На бую — якорный огонь обязательно ночью</span></label>
-          <label class="cl-item" data-id="rules-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">На тузике дети только в спасжилетах</span></label>
-          <label class="cl-item" data-id="rules-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-item-text">Звонок в марину за 20 мин до подхода</span></label>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Isole Eolie</div>
-  <div>Sun Odyssey 490 «Chaos» · Spartivento · Capo d'Orlando</div>
-  <div style="margin-top:4px;">8 взрослых + 4 ребёнка · 27.09–02.10.2026</div>
-  <div class="footer-motto">Buon vento e mare calmo ✦</div>
-</footer>
-
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<style>
-  .img-gallery { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
-  .img-gallery img { width: 72px; height: 56px; object-fit: cover; border-radius: 3px; }
-  .upload-hint { display: block; font-size: .75rem; color: var(--muted); }
-  .img-gallery:empty { display: none; }
-</style>
-
 <script>
-// ── MAP ──────────────────────────────────────────────────────
-const map = L.map('leaflet-map', {
-  center: [38.52, 14.95],
-  zoom: 9,
-  scrollWheelZoom: false,
-  zoomControl: true
+// ── TABS ─────────────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
+  if (name === 'map' && window._map) {
+    setTimeout(() => window._map.invalidateSize(), 20);
+  }
+}
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => showTab(btn.dataset.tab));
 });
 
+// ── MAP ───────────────────────────────────────────────────────
+const _map = L.map('leaflet-map', {
+  center: [38.54, 15.0],
+  zoom: 9,
+  scrollWheelZoom: false,
+  zoomControl: true,
+  attributionControl: true
+});
+window._map = _map;
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   maxZoom: 18
-}).addTo(map);
+}).addTo(_map);
 
-// Route polyline
-const routeCoords = [
-  [38.160, 14.740], // Capo d'Orlando (start)
-  [38.370, 15.000], // Punta dell'Asino Sud (anchor stop)
-  [38.413, 14.962], // Vulcano (overnight)
-  [38.650, 15.075], // Panarea (overnight)
-  [38.620, 15.100], // Lisca Bianca (snorkel stop)
-  [38.794, 15.234], // Stromboli (overnight)
-  [38.556, 14.872], // Salina (overnight)
-  [38.570, 14.820], // Pollara (anchor stop)
-  [38.474, 14.965], // Lipari (overnight)
-  [38.160, 14.740]  // Capo d'Orlando (return)
-];
+// Route
+L.polyline([
+  [38.160, 14.740],
+  [38.370, 15.000],
+  [38.413, 14.962],
+  [38.650, 15.075],
+  [38.620, 15.100],
+  [38.794, 15.234],
+  [38.556, 14.872],
+  [38.570, 14.820],
+  [38.474, 14.965],
+  [38.160, 14.740]
+], { color: '#1C6B78', weight: 2.5, opacity: .75, dashArray: '7, 5' }).addTo(_map);
 
-L.polyline(routeCoords, {
-  color: '#1C6B78',
-  weight: 2.5,
-  opacity: 0.75,
-  dashArray: '7, 5'
-}).addTo(map);
-
-function mkIcon(label, cls) {
-  return L.divIcon({ html: `<div class="${cls}">${label}</div>`, className: '', iconSize: [28,28], iconAnchor: [14,14] });
+function mkIcon(html, cls, size) {
+  return L.divIcon({ html: `<div class="${cls}">${html}</div>`, className: '', iconSize: [size,size], iconAnchor: [size/2,size/2] });
 }
 
 // Marina markers
-const marinas = [
-  { ll: [38.413, 14.962], day: 'I',   name: 'Baia Levante', island: 'Vulcano' },
-  { ll: [38.650, 15.075], day: 'II',  name: 'Sea Panarea',  island: 'Panarea' },
-  { ll: [38.794, 15.234], day: 'III', name: 'Del Gabbiano', island: 'Stromboli' },
-  { ll: [38.556, 14.872], day: 'IV',  name: 'Marinedì',     island: 'Salina' },
-  { ll: [38.474, 14.965], day: 'V',   name: 'EOLMARE',      island: 'Lipari' }
+const MARINAS = [
+  { id:'vulcano',   ll:[38.413,14.962], day:'I',   date:'27.09', name:'Marina Baia Levante', island:'Vulcano',   type:'marina', price:'~140 €' },
+  { id:'panarea',   ll:[38.650,15.075], day:'II',  date:'28.09', name:'Sea Panarea',          island:'Panarea',   type:'buoy',   price:'100 €' },
+  { id:'stromboli', ll:[38.794,15.234], day:'III', date:'29.09', name:'Marina del Gabbiano',  island:'Stromboli', type:'buoy',   price:'100 €' },
+  { id:'salina',    ll:[38.556,14.872], day:'IV',  date:'30.09', name:'Marina Salina',        island:'Salina',    type:'marina', price:'~165 €' },
+  { id:'lipari',    ll:[38.474,14.965], day:'V',   date:'01.10', name:'EOLMARE Marina Resort',island:'Lipari',    type:'marina', price:'70 €' }
 ];
-marinas.forEach(m => {
-  L.marker(m.ll, { icon: mkIcon(m.day, 'map-mk') })
-   .bindPopup(`<strong>${m.name}</strong><br>${m.island} · День ${m.day}`)
-   .addTo(map);
+
+MARINAS.forEach(m => {
+  const typeBadge = m.type === 'marina'
+    ? '<span style="background:rgba(14,30,56,.08);color:#1B3A5C;display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;">Марина</span>'
+    : '<span style="background:rgba(28,107,120,.1);color:#1C6B78;display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;">Буй</span>';
+
+  const popup = `
+    <div class="popup-card">
+      <div class="popup-day">День <strong>${m.day}</strong> · ${m.date}</div>
+      <div class="popup-body">
+        <div class="popup-name">${m.name}</div>
+        <div class="popup-island">${m.island}</div>
+        <div class="popup-badges">${typeBadge}</div>
+        <div class="popup-price">${m.price}</div>
+        <a class="popup-link" href="#" onclick="gotoMarina('${m.id}');return false;">Подробная информация →</a>
+      </div>
+    </div>`;
+
+  L.marker(m.ll, { icon: mkIcon(m.day, 'map-mk', 30) })
+   .bindPopup(popup, { maxWidth: 260, closeButton: false })
+   .addTo(_map);
 });
 
-// Base marker
-L.marker([38.160, 14.740], { icon: mkIcon('⚑', 'map-mk-base') })
- .bindPopup('<strong>Capo d\'Orlando</strong><br>База Spartivento')
- .addTo(map);
+// Base
+L.marker([38.160, 14.740], { icon: mkIcon('⚑', 'map-mk-base', 26) })
+ .bindPopup(`<div class="popup-card"><div class="popup-day">База</div><div class="popup-body"><div class="popup-name">Capo d'Orlando</div><div class="popup-island">Marina Spartivento · старт/финиш</div></div></div>`, { maxWidth: 220, closeButton: false })
+ .addTo(_map);
 
-// Stop markers
-const stops = [
-  { ll: [38.370, 15.000], name: "Punta dell'Asino Sud", note: 'Обед на якоре · День I' },
-  { ll: [38.620, 15.100], name: 'Lisca Bianca',          note: 'Подводные фумаролы · День III' },
-  { ll: [38.570, 14.820], name: 'Pollara',               note: 'Пляж-амфитеатр · День V' }
-];
-stops.forEach(s => {
-  L.marker(s.ll, { icon: L.divIcon({ html: '<div class="map-mk-stop"></div>', className: '', iconSize: [10,10], iconAnchor: [5,5] }) })
-   .bindPopup(`<strong>${s.name}</strong><br><span style="color:#7C6F63">${s.note}</span>`)
-   .addTo(map);
+// Anchor stops
+[
+  { ll:[38.370,15.000], name:"Punta dell'Asino Sud", note:'Обед на якоре · День I · чёрный пляж' },
+  { ll:[38.620,15.100], name:'Lisca Bianca',          note:'Подводные фумаролы · День III' },
+  { ll:[38.570,14.820], name:'Pollara',               note:'Пляж-амфитеатр «Il Postino» · День V' }
+].forEach(s => {
+  L.marker(s.ll, { icon: L.divIcon({ html:'<div class="map-mk-stop"></div>', className:'', iconSize:[12,12], iconAnchor:[6,6] }) })
+   .bindPopup(`<div class="popup-card"><div class="popup-body"><div class="popup-name">${s.name}</div><div class="popup-island">${s.note}</div></div></div>`, { maxWidth:220, closeButton:false })
+   .addTo(_map);
 });
 
-// ── CHECKLISTS ───────────────────────────────────────────────
-const STORAGE_KEY = 'eolie2026-checklists';
-
-function loadState() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }
-}
-function saveState(state) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
-
-function updateCount(groupEl) {
-  const all   = groupEl.querySelectorAll('.cl-item').length;
-  const done  = groupEl.querySelectorAll('.cl-item.checked').length;
-  const id    = groupEl.id + '-count';
-  const el    = document.getElementById(id);
-  if (el) el.textContent = done === all ? `✓ всё готово` : `${done}/${all}`;
-}
-
-function initChecklists() {
-  const state = loadState();
-  document.querySelectorAll('.cl-item').forEach(item => {
-    const id  = item.dataset.id;
-    const cb  = item.querySelector('input[type=checkbox]');
-    if (state[id]) {
-      item.classList.add('checked');
-      cb.checked = true;
+// ── GOTO MARINA ───────────────────────────────────────────────
+window.gotoMarina = function(id) {
+  showTab('marinas');
+  setTimeout(() => {
+    const el = document.getElementById('marina-' + id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      el.classList.add('highlight');
+      setTimeout(() => el.classList.remove('highlight'), 1200);
     }
-    item.addEventListener('click', () => {
-      cb.checked = !cb.checked;
-      item.classList.toggle('checked', cb.checked);
-      const s = loadState();
-      s[id] = cb.checked;
-      saveState(s);
-      updateCount(item.closest('.cl-group'));
-    });
-  });
-  document.querySelectorAll('.cl-group').forEach(updateCount);
+  }, 80);
+};
+
+// ── DOCUMENTS ─────────────────────────────────────────────────
+const DOC_KEY = 'eolie2026-docs';
+function loadDocs() { try { return JSON.parse(localStorage.getItem(DOC_KEY)||'{}'); } catch(e) { return {}; } }
+function saveDocs(d) { try { localStorage.setItem(DOC_KEY, JSON.stringify(d)); return true; } catch(e) { return false; } }
+
+function renderGallery(id) {
+  const g = document.getElementById('gallery-' + id);
+  if (!g) return;
+  const docs = loadDocs()[id] || [];
+  g.innerHTML = docs.map((src, i) =>
+    `<div class="doc-item">
+      <img src="${src}" onclick="openLightbox('${id}', ${i})" title="Нажми для увеличения">
+      <button class="doc-remove" onclick="removeDoc('${id}', ${i})" title="Удалить">×</button>
+    </div>`
+  ).join('');
 }
 
-function toggleCL(headEl) {
-  headEl.closest('.cl-group').classList.toggle('open');
-}
-
-initChecklists();
-
-// ── IMAGE UPLOAD PREVIEW ─────────────────────────────────────
-function addImages(input, galleryId) {
-  const gallery = document.getElementById(galleryId);
-  const hint = gallery.nextElementSibling;
-  Array.from(input.files).forEach(file => {
+window.addDocs = function(id, input) {
+  const files = Array.from(input.files);
+  let remaining = files.length;
+  files.forEach(file => {
     const reader = new FileReader();
     reader.onload = e => {
-      const img = document.createElement('img');
-      img.src = e.target.result;
-      gallery.appendChild(img);
+      const d = loadDocs();
+      if (!d[id]) d[id] = [];
+      d[id].push(e.target.result);
+      if (!saveDocs(d)) console.warn('localStorage quota exceeded, file shown in session only');
+      renderGallery(id);
+      remaining--;
     };
     reader.readAsDataURL(file);
   });
-  if (input.files.length) hint.textContent = '+ Добавить ещё';
   input.value = '';
+};
+
+window.removeDoc = function(id, i) {
+  const d = loadDocs();
+  if (d[id]) { d[id].splice(i, 1); saveDocs(d); renderGallery(id); }
+};
+
+// Lightbox
+window.openLightbox = function(id, i) {
+  const docs = loadDocs()[id] || [];
+  if (docs[i]) {
+    document.getElementById('lb-img').src = docs[i];
+    document.getElementById('lightbox').classList.add('open');
+  }
+};
+window.closeLightbox = function() {
+  document.getElementById('lightbox').classList.remove('open');
+};
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// Init galleries
+['vulcano','panarea','stromboli','salina','lipari'].forEach(renderGallery);
+
+// ── CHECKLISTS ────────────────────────────────────────────────
+const CL_KEY = 'eolie2026-checklists';
+function clLoad() { try { return JSON.parse(localStorage.getItem(CL_KEY)||'{}'); } catch(e) { return {}; } }
+function clSave(s) { localStorage.setItem(CL_KEY, JSON.stringify(s)); }
+
+function updateCount(groupId) {
+  const g = document.getElementById(groupId);
+  if (!g) return;
+  const all  = g.querySelectorAll('.cl-item').length;
+  const done = g.querySelectorAll('.cl-item.checked').length;
+  const c    = document.getElementById('clc-' + groupId.replace('clg-',''));
+  if (c) c.textContent = done === all ? '✓ готово' : `${done}/${all}`;
 }
+
+function initChecklists() {
+  const state = clLoad();
+  document.querySelectorAll('.cl-item').forEach(item => {
+    const id = item.dataset.id;
+    if (state[id]) item.classList.add('checked');
+    item.addEventListener('click', () => {
+      item.classList.toggle('checked');
+      const s = clLoad();
+      s[id] = item.classList.contains('checked');
+      clSave(s);
+      updateCount(item.closest('.cl-group').id);
+    });
+  });
+  ['clg-docs','clg-coord','clg-team','clg-gear','clg-rules'].forEach(updateCount);
+}
+
+window.toggleCL = function(head) {
+  const g = head.closest('.cl-group');
+  g.classList.toggle('open');
+  updateCount(g.id);
+};
+
+initChecklists();
 </script>
 </body>
 </html>
