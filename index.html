@@ -134,6 +134,24 @@
       line-height: 1.6;
     }
     .mh-route strong { color: rgba(255,255,255,.75); font-weight: 400; }
+    .hero-nav {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center; margin-top: 2.8rem;
+    }
+    .hero-nav-link {
+      padding: 9px 20px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 24px;
+      color: rgba(255,255,255,.6);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      background: none;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .hero-nav-link:hover { border-color: var(--sand); color: var(--sand-l); }
     .hero-stats {
       display: flex;
       gap: 0;
@@ -795,31 +813,17 @@
 
   <div class="map-hero">
     <div class="hero-bg"></div>
-    <p class="mh-eyebrow">Яхтенный чартер · Spartivento · Sun Odyssey 490 «Chaos»</p>
     <h1 class="mh-title">Липары 2026</h1>
     <p class="mh-route">
       <strong>Capo d'Orlando</strong> &thinsp;→&thinsp; Vulcano &thinsp;→&thinsp; Panarea &thinsp;→&thinsp; Stromboli &thinsp;→&thinsp; Salina &thinsp;→&thinsp; Lipari &thinsp;→&thinsp; <strong>Capo d'Orlando</strong>
     </p>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-val">27.09</span>
-        <span class="stat-lbl">старт</span>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <span class="stat-val">6</span>
-        <span class="stat-lbl">дней</span>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <span class="stat-val">~110</span>
-        <span class="stat-lbl">морских миль</span>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <span class="stat-val">12</span>
-        <span class="stat-lbl">человек</span>
-      </div>
+    <div class="hero-nav">
+      <button class="hero-nav-link" onclick="showTab('route')">Маршрут</button>
+      <button class="hero-nav-link" onclick="showTab('marinas')">Марины</button>
+      <button class="hero-nav-link" onclick="showTab('flights')">Перелёты</button>
+      <button class="hero-nav-link" onclick="showTab('life')">На борту</button>
+      <button class="hero-nav-link" onclick="showTab('budget')">Бюджет</button>
+      <button class="hero-nav-link" onclick="showTab('checklists')">Чек-листы</button>
     </div>
   </div>
 
