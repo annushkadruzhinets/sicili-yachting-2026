@@ -1562,6 +1562,31 @@ window.toggleCL = function(head) {
 };
 
 initChecklists();
+
+// Fix: on mobile Leaflet intercepts upward swipe on map and pans instead of
+// scrolling the page back to the hero. Intercept in capture phase (fires before
+// Leaflet's bubble handlers) and manually scroll #tab-map when the gesture is
+// clearly "scroll up" (finger moving down, container has room to scroll).
+(function() {
+  const tabMap = document.getElementById('tab-map');
+  const mapCont = document.querySelector('.map-container');
+  if (!mapCont) return;
+  let ty0 = 0, st0 = 0;
+
+  mapCont.addEventListener('touchstart', e => {
+    ty0 = e.touches[0].clientY;
+    st0 = tabMap.scrollTop;
+  }, { capture: true, passive: true });
+
+  mapCont.addEventListener('touchmove', e => {
+    const dy = e.touches[0].clientY - ty0; // positive = finger going down = scroll up
+    if (dy > 12 && tabMap.scrollTop > 0) {
+      e.stopPropagation(); // don't let Leaflet see this event
+      e.preventDefault();  // don't trigger browser scroll
+      tabMap.scrollTop = Math.max(0, st0 - dy);
+    }
+  }, { capture: true, passive: false });
+})();
 </script>
 </body>
 </html>
