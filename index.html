@@ -667,6 +667,9 @@
     .cl-item.checked .cl-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(0,0,0,.18); }
 
     /* ── LIFE TAB ────────────────────────────── */
+    .life-video-block { margin-bottom: 3rem; }
+    .life-video-block video { width: 100%; max-width: 480px; border-radius: var(--radius); display: block; }
+    .life-video-label { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
     .life-intro { font-size: 1rem; color: var(--mid); line-height: 1.8; margin-bottom: 2.8rem; max-width: 640px; font-style: italic; }
     .life-timeline { display: flex; flex-direction: column; }
     .life-block { display: grid; grid-template-columns: 90px 1fr; gap: 0 36px; padding: 32px 0; border-bottom: 1px solid var(--border); }
@@ -1513,6 +1516,14 @@
         <p class="section-label">Для тех, кто первый раз</p>
         <h2 class="section-title">Как проходит день на яхте</h2>
         <div class="section-rule"></div>
+
+        <div class="life-video-block">
+          <video controls playsinline preload="metadata">
+            <source src="rules.mp4" type="video/mp4">
+          </video>
+          <div class="life-video-label">Правила на борту</div>
+        </div>
+
         <div class="life-timeline">
 
           <div class="life-block">
