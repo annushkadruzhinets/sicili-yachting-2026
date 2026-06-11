@@ -648,6 +648,78 @@
     .cl-text { font-size: .83rem; color: var(--mid); line-height: 1.5; }
     .cl-item.checked .cl-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(0,0,0,.18); }
 
+    /* ── FLIGHTS TAB ─────────────────────────── */
+    .flights-section { padding: 48px 0; }
+    .flights-section:nth-child(even) { background: var(--cream-d); }
+    .flights-grid { display: flex; flex-direction: column; gap: 10px; }
+    .flight-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: 148px 1fr auto;
+      align-items: center;
+      gap: 0;
+      overflow: hidden;
+    }
+    .flight-card.fc-pending { opacity: .72; background: var(--cream); }
+    .fc-family {
+      padding: 16px 18px;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--navy);
+      border-right: 1px solid var(--border);
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+    .fc-body {
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .fc-route {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .fc-meta {
+      font-size: .78rem;
+      color: var(--muted);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .fc-flight { color: var(--sea); font-weight: 500; }
+    .fc-status {
+      padding: 14px 18px;
+      border-left: 1px solid var(--border);
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+    .fc-badge {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .fc-badge-ok { background: var(--green-bg); color: var(--green); }
+    .fc-badge-pending { background: var(--cream-d); color: var(--muted); }
+    .fc-badge-note { background: #FEF3E2; color: #8A5A00; }
+    @media (max-width: 540px) {
+      .flight-card { grid-template-columns: 1fr; }
+      .fc-family { border-right: none; border-bottom: 1px solid var(--border); align-self: auto; padding: 12px 14px; }
+      .fc-status { border-left: none; border-top: 1px solid var(--border); align-self: auto; padding: 10px 14px; }
+      .fc-body { padding: 12px 14px; }
+    }
+
     /* ── FOOTER ──────────────────────────────── */
     footer { background: var(--navy); color: rgba(255,255,255,.35); text-align: center; padding: 32px 24px; font-size: .78rem; flex-shrink: 0; }
     .footer-motto { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .95rem; color: rgba(255,255,255,.25); margin-top: 8px; }
@@ -691,6 +763,7 @@
     <button class="tab-btn" data-tab="marinas">Марины</button>
     <button class="tab-btn" data-tab="budget">Бюджет</button>
     <button class="tab-btn" data-tab="checklists">Чек-листы</button>
+    <button class="tab-btn" data-tab="flights">Перелёты</button>
   </div>
 </nav>
 
@@ -1372,6 +1445,153 @@
         </div>
       </div>
     </section>
+  </div>
+</div>
+
+<!-- ═══════════ FLIGHTS TAB ═══════════ -->
+<div id="tab-flights" class="tab-panel">
+  <div class="tab-content">
+
+    <!-- ПРИБЫТИЕ -->
+    <section class="flights-section">
+      <div class="container">
+        <p class="section-label">Когда летим</p>
+        <h2 class="section-title">Прибытие</h2>
+        <div class="section-rule"></div>
+        <div class="flights-grid">
+
+          <!-- Аня, Вова и Варя -->
+          <div class="flight-card">
+            <div class="fc-family">Аня, Вова&nbsp;&amp;&nbsp;Варя</div>
+            <div class="fc-body">
+              <div class="fc-route">Париж (Орли) → Палермо</div>
+              <div class="fc-meta">
+                <span class="fc-flight">Transavia TO3920</span>
+                <span>25 сентября · 20:45 → 23:10</span>
+              </div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
+          </div>
+
+          <!-- Лиза, Диня и Саломея -->
+          <div class="flight-card fc-pending">
+            <div class="fc-family">Лиза, Диня&nbsp;&amp;&nbsp;Саломея</div>
+            <div class="fc-body">
+              <div class="fc-route">—</div>
+              <div class="fc-meta"><span>Билеты ещё не куплены</span></div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-pending">Не куплено</span></div>
+          </div>
+
+          <!-- Аня и Ромчик -->
+          <div class="flight-card">
+            <div class="fc-family">Аня&nbsp;&amp;&nbsp;Ромчик</div>
+            <div class="fc-body">
+              <div class="fc-route">Барселона → Катания</div>
+              <div class="fc-meta">
+                <span class="fc-flight">Vueling VY&nbsp;6532</span>
+                <span>26 сентября · 11:15 → 13:25</span>
+              </div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
+          </div>
+
+          <!-- Наташа, Тёма и Даня -->
+          <div class="flight-card">
+            <div class="fc-family">Наташа, Тёма&nbsp;&amp;&nbsp;Даня</div>
+            <div class="fc-body">
+              <div class="fc-route">Тель-Авив → Палермо</div>
+              <div class="fc-meta">
+                <span>26 сентября · 21:35 → 23:55</span>
+              </div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
+          </div>
+
+          <!-- Колян -->
+          <div class="flight-card fc-pending">
+            <div class="fc-family">Колян</div>
+            <div class="fc-body">
+              <div class="fc-route">—</div>
+              <div class="fc-meta"><span>Билет ещё не куплен</span></div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-pending">Не куплено</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ОТЪЕЗД -->
+    <section class="flights-section">
+      <div class="container">
+        <p class="section-label">Когда летим</p>
+        <h2 class="section-title">Отъезд</h2>
+        <div class="section-rule"></div>
+        <div class="flights-grid">
+
+          <!-- Аня, Вова и Варя -->
+          <div class="flight-card">
+            <div class="fc-family">Аня, Вова&nbsp;&amp;&nbsp;Варя</div>
+            <div class="fc-body">
+              <div class="fc-route">Палермо → Вена</div>
+              <div class="fc-meta">
+                <span class="fc-flight">Ryanair FR7317</span>
+                <span>7 октября · 20:25 → 22:25</span>
+              </div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
+          </div>
+
+          <!-- Лиза, Диня и Саломея -->
+          <div class="flight-card fc-pending">
+            <div class="fc-family">Лиза, Диня&nbsp;&amp;&nbsp;Саломея</div>
+            <div class="fc-body">
+              <div class="fc-route">—</div>
+              <div class="fc-meta"><span>Билеты ещё не куплены</span></div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-pending">Не куплено</span></div>
+          </div>
+
+          <!-- Аня и Ромчик -->
+          <div class="flight-card">
+            <div class="fc-family">Аня&nbsp;&amp;&nbsp;Ромчик</div>
+            <div class="fc-body">
+              <div class="fc-route">Катания → Барселона</div>
+              <div class="fc-meta">
+                <span class="fc-flight">Vueling VY&nbsp;6533</span>
+                <span>3 октября · 14:10 → 16:30</span>
+              </div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
+          </div>
+
+          <!-- Наташа, Тёма и Даня -->
+          <div class="flight-card">
+            <div class="fc-family">Наташа, Тёма&nbsp;&amp;&nbsp;Даня</div>
+            <div class="fc-body">
+              <div class="fc-route">Палермо → Тель-Авив</div>
+              <div class="fc-meta">
+                <span>7 октября · 16:25 → 20:40</span>
+              </div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
+          </div>
+
+          <!-- Колян -->
+          <div class="flight-card fc-pending">
+            <div class="fc-family">Колян</div>
+            <div class="fc-body">
+              <div class="fc-route">—</div>
+              <div class="fc-meta"><span>Билет ещё не куплен</span></div>
+            </div>
+            <div class="fc-status"><span class="fc-badge fc-badge-pending">Не куплено</span></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
