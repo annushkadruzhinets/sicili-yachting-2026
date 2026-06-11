@@ -1800,7 +1800,20 @@ function showTab(name) {
   }
 }
 document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => showTab(btn.dataset.tab));
+  btn.addEventListener('click', () => {
+    showTab(btn.dataset.tab);
+    if (btn.dataset.tab === 'map') {
+      const tabMap = document.getElementById('tab-map');
+      const mapContainer = document.querySelector('.map-container');
+      if (mapContainer) setTimeout(() => tabMap.scrollTop = mapContainer.offsetTop, 25);
+    }
+  });
+});
+
+document.querySelector('.nav-brand').style.cursor = 'pointer';
+document.querySelector('.nav-brand').addEventListener('click', () => {
+  showTab('map');
+  setTimeout(() => document.getElementById('tab-map').scrollTop = 0, 25);
 });
 
 // ── MAP ───────────────────────────────────────────────────────
