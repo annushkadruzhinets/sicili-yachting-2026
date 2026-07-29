@@ -700,7 +700,9 @@
     /* ── LIFE TAB ────────────────────────────── */
     .life-video-block { margin-bottom: 3rem; }
     .life-video-block video { width: 100%; max-width: 480px; border-radius: var(--radius); display: block; }
-    .life-video-label { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+    /* Это просьба к читателю, а не ярлык: капслок с разрядкой, как у остальных
+       подписей, на целом предложении читался бы как крик. */
+    .life-video-label { font-size: .88rem; color: var(--mid); margin-top: 12px; max-width: 480px; line-height: 1.5; }
     .life-intro { font-size: 1rem; color: var(--mid); line-height: 1.8; margin-bottom: 2.8rem; max-width: 640px; font-style: italic; }
     .life-timeline { display: flex; flex-direction: column; }
     .life-block { display: grid; grid-template-columns: 90px 1fr; gap: 0 36px; padding: 32px 0; border-bottom: 1px solid var(--border); }
@@ -1501,7 +1503,7 @@
           <video controls playsinline preload="metadata">
             <source src="rules.mp4" type="video/mp4">
           </video>
-          <div class="life-video-label">Правила на борту</div>
+          <div class="life-video-label">Посмотрите, пожалуйста, видео про безопасность на яхте, это важно</div>
         </div>
 
         <div class="life-timeline">
