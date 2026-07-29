@@ -820,21 +820,21 @@
       bottom: 24px;
       right: 20px;
       z-index: 950;
-      width: 44px; height: 44px;
+      width: 60px; height: 60px;
       border-radius: 50%;
       background: var(--navy);
-      color: rgba(255,255,255,.85);
-      border: 1.5px solid rgba(255,255,255,.12);
-      font-size: 1.1rem;
+      color: #fff;
+      border: 2px solid var(--sand);
+      font-size: 1.6rem;
       cursor: pointer;
-      box-shadow: 0 3px 14px rgba(14,30,56,.35);
+      box-shadow: 0 5px 20px rgba(14,30,56,.45);
       display: none;
       align-items: center;
       justify-content: center;
       transition: opacity .2s, transform .2s;
     }
     #back-to-top.visible { display: flex; }
-    #back-to-top:hover { background: var(--navy-mid); transform: translateY(-2px); }
+    #back-to-top:hover { background: var(--navy-mid); border-color: var(--sand-l); transform: translateY(-2px); }
 
     @media (max-width: 560px) {
       .timeline { padding-left: 52px; }
@@ -869,6 +869,7 @@
       <strong>Capo d'Orlando</strong> &thinsp;→&thinsp; Vulcano &thinsp;→&thinsp; Panarea &thinsp;→&thinsp; Stromboli &thinsp;→&thinsp; Salina &thinsp;→&thinsp; Lipari &thinsp;→&thinsp; <strong>Capo d'Orlando</strong>
     </p>
     <div class="hero-nav">
+      <button class="hero-nav-link" onclick="scrollToMap()">Карта</button>
       <button class="hero-nav-link" onclick="showTab('route')">Маршрут</button>
       <button class="hero-nav-link" onclick="showTab('marinas')">Марины</button>
       <button class="hero-nav-link" onclick="showTab('flights')">Перелёты</button>
@@ -1807,13 +1808,51 @@ function showTab(name) {
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     showTab(btn.dataset.tab);
+    // Возврат на «Карту» с других вкладок — на главный экран, а не к самой
+    // карте: панель хранит прежний scrollTop, и без сброса читатель попадал
+    // в середину, минуя заголовок.
     if (btn.dataset.tab === 'map') {
-      const tabMap = document.getElementById('tab-map');
-      const mapContainer = document.querySelector('.map-container');
-      if (mapContainer) setTimeout(() => tabMap.scrollTop = mapContainer.offsetTop, 25);
+      setTimeout(() => document.getElementById('tab-map').scrollTop = 0, 25);
     }
   });
 });
+
+// Плавная прокрутка панели своими руками. Штатное
+// scrollTo({behavior:'smooth'}) на этой панели срабатывает не везде и молча
+// ничего не делает — именно из-за этого кнопка «наверх» не работала.
+function smoothScrollTo(el, to, ms) {
+  const from = el.scrollTop;
+  const dest = Math.max(0, Math.min(to, el.scrollHeight - el.clientHeight));
+  if (dest === from) return;
+  // Анимировать нечем и незачем: в скрытой вкладке requestAnimationFrame не
+  // тикает вообще, а при включённом «уменьшить движение» анимация не нужна.
+  // Без этой ветки прокрутка молча не срабатывала бы.
+  if (document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.scrollTop = dest;
+    return;
+  }
+  const t0 = performance.now();
+  (function step(now) {
+    const p = Math.min(1, (now - t0) / ms);
+    const e = p < .5 ? 2 * p * p : 1 - 2 * (1 - p) * (1 - p);   // ease-in-out
+    el.scrollTop = from + (dest - from) * e;
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+// Смещение элемента внутри прокручиваемой панели. Через offsetTop считать
+// нельзя: панель статична, offsetParent у неё BODY, и в значение попадает
+// высота навбара — прокрутка уезжала бы на неё мимо цели.
+function offsetWithin(el, scroller) {
+  return el.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop;
+}
+
+// Кнопка «Карта» в главном экране: та же вкладка, просто прокрутка к карте.
+window.scrollToMap = function() {
+  const tabMap = document.getElementById('tab-map');
+  const mapContainer = document.querySelector('.map-container');
+  if (mapContainer) smoothScrollTo(tabMap, offsetWithin(mapContainer, tabMap), 500);
+};
 
 document.querySelector('.nav-brand').style.cursor = 'pointer';
 document.querySelector('.nav-brand').addEventListener('click', () => {
@@ -2027,7 +2066,7 @@ initChecklists();
     btn.classList.toggle('visible', tabMap.scrollTop > 80);
   });
   btn.addEventListener('click', () => {
-    tabMap.scrollTo({ top: 0, behavior: 'smooth' });
+    smoothScrollTo(tabMap, 0, 400);
   });
 })();
 </script>
