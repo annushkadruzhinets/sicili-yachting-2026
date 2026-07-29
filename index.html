@@ -94,6 +94,26 @@
     .tab-btn:hover { color: rgba(255,255,255,.75); }
     .tab-btn.active { color: #fff; border-bottom-color: var(--sand); }
 
+    /* Бренд съедает ~140 px из 375 — на телефоне все 7 табов не влезают.
+       Убираем его из нава: на карте и так есть заголовок «Липары 2026».
+       Семь табов в один ряд всё равно не помещаются, поэтому справа —
+       градиент-подсказка, что строку можно тянуть. */
+    @media (max-width: 900px) {
+      .nav-brand { display: none; }
+      .tabs { width: 100%; }
+      .tab-btn { padding: 0 12px; letter-spacing: .1em; }
+      nav::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 28px;
+        height: 100%;
+        pointer-events: none;
+        background: linear-gradient(to right, rgba(14,30,56,0), var(--navy));
+      }
+    }
+
     /* ── TAB PANELS ──────────────────────────── */
     .tab-panel { display: none; flex: 1; }
     .tab-panel.active { display: flex; flex-direction: column; }
@@ -1657,13 +1677,17 @@
           </div>
 
           <!-- Лиза, Диня и Саломея -->
-          <div class="flight-card fc-pending">
+          <div class="flight-card">
             <div class="fc-family">Лиза, Диня&nbsp;&amp;&nbsp;Саломея</div>
             <div class="fc-body">
-              <div class="fc-route">—</div>
-              <div class="fc-meta"><span>Билеты ещё не куплены</span></div>
+              <div class="fc-route">Москва (Внуково) → Катания</div>
+              <div class="fc-meta">
+                <span class="fc-flight">Turkish TK412 → TK1393</span>
+                <span>26 сентября · 00:30 → 08:20</span>
+                <span>стыковка в Стамбуле 2 ч 20 м · летят вместе с Коляном</span>
+              </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-pending">Не куплено</span></div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Аня и Ромчик -->
@@ -1692,13 +1716,17 @@
           </div>
 
           <!-- Колян -->
-          <div class="flight-card fc-pending">
+          <div class="flight-card">
             <div class="fc-family">Колян</div>
             <div class="fc-body">
-              <div class="fc-route">—</div>
-              <div class="fc-meta"><span>Билет ещё не куплен</span></div>
+              <div class="fc-route">Москва (Внуково) → Катания</div>
+              <div class="fc-meta">
+                <span class="fc-flight">Turkish TK412 → TK1393</span>
+                <span>26 сентября · 00:30 → 08:20</span>
+                <span>стыковка в Стамбуле 2 ч 20 м · летит вместе с Лизой, Диней и Саломеей</span>
+              </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-pending">Не куплено</span></div>
+            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
         </div>
