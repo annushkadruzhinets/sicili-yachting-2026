@@ -547,6 +547,9 @@
     }
     .type-marina { background: rgba(14,30,56,.08); color: var(--navy-mid); }
     .type-buoy   { background: rgba(28,107,120,.1); color: var(--sea); }
+    /* Плашка виллы — на песочной подложке, но текст берём из переменных:
+       сам --sand на своей же заливке читается плохо. */
+    .type-villa  { background: rgba(201,146,74,.18); color: var(--mid); }
     .day-alert {
       margin-top: 9px; padding: 7px 12px;
       background: rgba(168,59,42,.06);
@@ -1128,12 +1131,20 @@
                 <span class="day-date">3 октября · суббота</span>
                 <span class="day-distance">день после чартера</span>
               </div>
-              <h3 class="day-route">Capo d'Orlando → вилла</h3>
+              <h3 class="day-route">Capo d'Orlando → Piccolo Casale</h3>
               <p class="day-title">Переезд на виллу</p>
               <ul class="day-program">
                 <li>До 10:00 — съезжаем с лодки, собираем вещи</li>
                 <li>Отправляемся на виллу</li>
               </ul>
+              <div class="day-overnight">
+                <span>⌂</span>
+                <div>
+                  <span class="overnight-name">Piccolo Casale</span>
+                  <span class="overnight-type type-villa">вилла · 3.10 – 7.10</span>
+                  <div style="color:var(--muted);font-size:.75rem;margin-top:1px;">Sant'Anna, Acquedolci · 38.053779, 14.596039</div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1990,7 +2001,7 @@ const VILLA_COORDS = '38.053779, 14.596039';
 L.marker(VILLA_LL, { icon: mkIcon('⌂', 'map-mk-villa', 26) })
  .bindPopup(`
    <div class="popup-card">
-     <div class="popup-day">После яхты · <strong>3.10</strong></div>
+     <div class="popup-day">После яхты · <strong>3.10 – 7.10</strong></div>
      <img class="popup-photo" src="photos/villa.jpg" alt="Piccolo Casale — дом и бассейн">
      <div class="popup-body">
        <div class="popup-name">Piccolo Casale</div>
