@@ -315,31 +315,14 @@
       color: var(--sand-l);
       font-weight: 500;
     }
-    /* CC BY-SA требует указать автора и лицензию — строка под картой. */
-    .map-credit {
-      padding: 12px 24px 20px;
-      font-size: .72rem;
-      color: var(--muted);
-      line-height: 1.5;
-      background: var(--cream);
-    }
-    .map-credit a { color: var(--sea); text-decoration: none; border-bottom: 1px solid rgba(28,107,120,.3); }
-    .map-credit a:hover { color: var(--sea-l); }
-
-    /* Аэрофото острова в карточке на карте. Фиксированная высота, чтобы
-       карточки не прыгали: снимки разной пропорции. */
+    /* Фото места в карточке на карте. Все снимки заранее приведены к 620×360,
+       поэтому cover ничего не режет — высота просто держит пропорцию. */
     .popup-photo {
       display: block;
       width: 100%;
-      height: 118px;
+      height: 126px;
       object-fit: cover;
       background: var(--cream-d);
-    }
-    .popup-photo-cap {
-      padding: 5px 14px 0;
-      font-size: .62rem;
-      color: var(--muted);
-      line-height: 1.35;
     }
     .popup-body {
       padding: 10px 14px 12px;
@@ -904,18 +887,6 @@
     </div>
   </div>
 
-  <p class="map-credit">
-    Фото в карточках, все уменьшены до ширины карточки: пять островов с воздуха —
-    <a href="https://commons.wikimedia.org/wiki/User:Carsten_Steger" target="_blank" rel="noopener">Carsten Steger</a>,
-    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>;
-    Lisca Bianca — <a href="https://commons.wikimedia.org/wiki/User:Bernard_Gagnon" target="_blank" rel="noopener">Bernard Gagnon</a>,
-    <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>;
-    Pollara — <a href="https://commons.wikimedia.org/wiki/User:Davide_Mauro" target="_blank" rel="noopener">Davide Mauro</a>;
-    порт Capo d'Orlando — <a href="https://commons.wikimedia.org/wiki/User:Formica_rufa" target="_blank" rel="noopener">Formica rufa</a>;
-    берег Vulcano — <a href="https://commons.wikimedia.org/wiki/File:Faro_di_Gelso_isola_di_Vulcano_visto_dal_mare_by_Stephen_Kleckner.jpg" target="_blank" rel="noopener">Stephen Kleckner</a>;
-    последние три — CC BY-SA 4.0. Все снимки с
-    <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Викисклада</a>.
-  </p>
 
 </div>
 
@@ -1924,17 +1895,13 @@ L.marker([38.160, 14.740], { icon: mkIcon('⚑', 'map-mk-base', 26) })
  .addTo(_map);
 
 // Anchor stops
-// cap — подпись под фото. Нужна там, где снимка самой точки на Викискладе нет
-// и кадр показывает окрестности: иначе читатель решит, что это она и есть.
 [
-  { ll:[38.370,15.000], name:"Punta dell'Asino Sud", note:'Обед на якоре · День I · чёрный пляж', photo:'asino.jpg',       cap:'Южный берег Vulcano с моря — маяк Gelso' },
+  { ll:[38.370,15.000], name:"Punta dell'Asino Sud", note:'Обед на якоре · День I · чёрный пляж', photo:'asino.jpg' },
   { ll:[38.620,15.100], name:'Lisca Bianca',          note:'Подводные фумаролы · День III',        photo:'lisca-bianca.jpg' },
   { ll:[38.570,14.820], name:'Pollara',               note:'Пляж-амфитеатр «Il Postino» · День V', photo:'pollara.jpg' }
 ].forEach(s => {
-  const photo = `<img class="popup-photo" src="photos/${s.photo}" alt="${s.name}">`
-    + (s.cap ? `<div class="popup-photo-cap">${s.cap}</div>` : '');
   L.marker(s.ll, { icon: L.divIcon({ html:'<div class="map-mk-stop"></div>', className:'', iconSize:[12,12], iconAnchor:[6,6] }) })
-   .bindPopup(`<div class="popup-card">${photo}<div class="popup-body"><div class="popup-name">${s.name}</div><div class="popup-island">${s.note}</div></div></div>`, { maxWidth:220, closeButton:false })
+   .bindPopup(`<div class="popup-card"><img class="popup-photo" src="photos/${s.photo}" alt="${s.name}"><div class="popup-body"><div class="popup-name">${s.name}</div><div class="popup-island">${s.note}</div></div></div>`, { maxWidth:220, closeButton:false })
    .addTo(_map);
 });
 
