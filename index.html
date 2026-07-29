@@ -287,6 +287,14 @@
       font-size: .75rem; border: 1.5px solid #fff;
       box-shadow: 0 1px 4px rgba(0,0,0,.2); flex-shrink: 0;
     }
+    .leg-mk-villa {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: var(--sand); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; line-height: 1; padding-top: 2px;
+      border: 1.5px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2); flex-shrink: 0;
+    }
 
     /* Leaflet popup custom styles */
     .leaflet-popup-content-wrapper {
@@ -390,6 +398,18 @@
       background: var(--rust); color: #fff;
       display: flex; align-items: center; justify-content: center;
       font-size: .85rem; border: 2px solid rgba(255,255,255,.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+    /* Вилла — не часть морской петли, поэтому и форма другая: квадрат со
+       скруглением, а не круг, как у точек маршрута. */
+    .map-mk-villa {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: var(--sand); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      /* ⌂ в большинстве шрифтов рисуется мелким, поэтому кегль крупнее, чем
+         у флажка базы, и сдвиг вниз — иначе символ висит у верхней кромки. */
+      font-size: 1.15rem; line-height: 1; padding-top: 3px;
+      border: 2px solid rgba(255,255,255,.85);
       box-shadow: 0 2px 8px rgba(0,0,0,.3);
     }
 
@@ -885,6 +905,7 @@
       <div class="legend-row"><div class="leg-mk">I</div><span>Марина / буй (ночёвка)</span></div>
       <div class="legend-row"><div class="leg-mk-stop"></div><span>Якорная стоянка</span></div>
       <div class="legend-row"><div class="leg-mk-base">⚑</div><span>База (Capo d'Orlando)</span></div>
+      <div class="legend-row"><div class="leg-mk-villa">⌂</div><span>Вилла (после яхты)</span></div>
     </div>
   </div>
 
@@ -1931,6 +1952,19 @@ MARINAS.forEach(m => {
 // Base
 L.marker([38.160, 14.740], { icon: mkIcon('⚑', 'map-mk-base', 26) })
  .bindPopup(`<div class="popup-card"><div class="popup-day">База</div><img class="popup-photo" src="photos/capo-orlando.jpg" alt="Порт Capo d'Orlando"><div class="popup-body"><div class="popup-name">Capo d'Orlando</div><div class="popup-island">Marina Spartivento · старт/финиш</div></div></div>`, { maxWidth: 220, closeButton: false })
+ .addTo(_map);
+
+// Villa — куда переезжаем 3 октября, когда сдадим лодку
+L.marker([38.0537787, 14.5960389], { icon: mkIcon('⌂', 'map-mk-villa', 26) })
+ .bindPopup(`
+   <div class="popup-card">
+     <div class="popup-day">После яхты · <strong>3.10</strong></div>
+     <div class="popup-body">
+       <div class="popup-name">Piccolo Casale</div>
+       <div class="popup-island">Sant'Anna, Acquedolci · 17 км по прямой от Capo d'Orlando</div>
+       <a class="popup-link" href="https://maps.app.goo.gl/M7y4byd3iCw4VbA99" target="_blank" rel="noopener">Открыть в Google Maps →</a>
+     </div>
+   </div>`, { maxWidth: 240, closeButton: false })
  .addTo(_map);
 
 // Anchor stops
