@@ -332,6 +332,35 @@
       object-fit: cover;
       background: var(--cream-d);
     }
+    /* Координаты виллы — чтобы дать таксисту. Моноширинные: у пропорционального
+       шрифта цифры разной ширины и строку неудобно считывать вслух. */
+    .popup-coords {
+      margin: 9px 0 2px;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .popup-coords code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .74rem;
+      color: var(--navy);
+      background: var(--cream-d);
+      padding: 4px 7px;
+      border-radius: 4px;
+      user-select: all;
+    }
+    .popup-copy {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .64rem; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--sea);
+      background: none;
+      border: 1px solid rgba(28,107,120,.35);
+      border-radius: 4px;
+      padding: 4px 8px;
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .popup-copy:hover { background: rgba(28,107,120,.08); }
+    .popup-copy.done { color: var(--green); border-color: rgba(43,110,72,.45); }
+
     .popup-body {
       padding: 10px 14px 12px;
     }
@@ -1955,17 +1984,51 @@ L.marker([38.160, 14.740], { icon: mkIcon('⚑', 'map-mk-base', 26) })
  .addTo(_map);
 
 // Villa — куда переезжаем 3 октября, когда сдадим лодку
-L.marker([38.0537787, 14.5960389], { icon: mkIcon('⌂', 'map-mk-villa', 26) })
+const VILLA_LL = [38.0537787, 14.5960389];
+const VILLA_COORDS = '38.053779, 14.596039';
+
+L.marker(VILLA_LL, { icon: mkIcon('⌂', 'map-mk-villa', 26) })
  .bindPopup(`
    <div class="popup-card">
      <div class="popup-day">После яхты · <strong>3.10</strong></div>
+     <img class="popup-photo" src="photos/villa.jpg" alt="Piccolo Casale — дом и бассейн">
      <div class="popup-body">
        <div class="popup-name">Piccolo Casale</div>
        <div class="popup-island">Sant'Anna, Acquedolci · 17 км по прямой от Capo d'Orlando</div>
+       <div class="popup-coords">
+         <code>${VILLA_COORDS}</code>
+         <button class="popup-copy" onclick="copyVillaCoords(this)">копировать</button>
+       </div>
        <a class="popup-link" href="https://maps.app.goo.gl/M7y4byd3iCw4VbA99" target="_blank" rel="noopener">Открыть в Google Maps →</a>
      </div>
-   </div>`, { maxWidth: 240, closeButton: false })
+   </div>`, { maxWidth: 250, closeButton: false })
  .addTo(_map);
+
+// Координаты для таксиста. clipboard доступен только в защищённом контексте —
+// на GitHub Pages и localhost он есть, но если браузер откажет, выделяем текст
+// сам, чтобы человек мог скопировать вручную.
+window.copyVillaCoords = function(btn) {
+  const done = () => {
+    btn.textContent = 'скопировано';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'копировать'; btn.classList.remove('done'); }, 1800);
+  };
+  const fallback = () => {
+    const code = btn.parentNode.querySelector('code');
+    const r = document.createRange();
+    r.selectNodeContents(code);
+    const sel = getSelection();
+    sel.removeAllRanges();
+    sel.addRange(r);
+    btn.textContent = 'выделено';
+    setTimeout(() => { btn.textContent = 'копировать'; }, 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(VILLA_COORDS).then(done).catch(fallback);
+  } else {
+    fallback();
+  }
+};
 
 // Anchor stops
 [
