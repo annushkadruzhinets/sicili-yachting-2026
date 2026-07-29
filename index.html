@@ -309,6 +309,26 @@
       color: var(--sand-l);
       font-weight: 500;
     }
+    /* CC BY-SA требует указать автора и лицензию — строка под картой. */
+    .map-credit {
+      padding: 12px 24px 20px;
+      font-size: .72rem;
+      color: var(--muted);
+      line-height: 1.5;
+      background: var(--cream);
+    }
+    .map-credit a { color: var(--sea); text-decoration: none; border-bottom: 1px solid rgba(28,107,120,.3); }
+    .map-credit a:hover { color: var(--sea-l); }
+
+    /* Аэрофото острова в карточке на карте. Фиксированная высота, чтобы
+       карточки не прыгали: снимки разной пропорции. */
+    .popup-photo {
+      display: block;
+      width: 100%;
+      height: 118px;
+      object-fit: cover;
+      background: var(--cream-d);
+    }
     .popup-body {
       padding: 10px 14px 12px;
     }
@@ -871,6 +891,11 @@
       <div class="legend-row"><div class="leg-mk-base">⚑</div><span>База (Capo d'Orlando)</span></div>
     </div>
   </div>
+
+  <p class="map-credit">
+    Аэрофотоснимки островов в карточках — <a href="https://commons.wikimedia.org/wiki/User:Carsten_Steger" target="_blank" rel="noopener">Carsten Steger</a>,
+    <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, уменьшены до ширины карточки.
+  </p>
 
 </div>
 
@@ -1855,6 +1880,10 @@ MARINAS.forEach(m => {
   const popup = `
     <div class="popup-card">
       <div class="popup-day">День <strong>${m.day}</strong> · ${m.date}</div>
+      <!-- Без loading="lazy": внутри поповера Leaflet ленивая загрузка не
+           срабатывает и картинка остаётся пустой. Смысла в ней тут и нет —
+           карточка создаётся только в момент клика по маркеру. -->
+      <img class="popup-photo" src="photos/${m.id}.jpg" alt="${m.island} с воздуха">
       <div class="popup-body">
         <div class="popup-name">${m.name}</div>
         <div class="popup-island">${m.island}</div>
