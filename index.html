@@ -686,8 +686,16 @@
     .cl-item:hover .cl-box { border-color: var(--sea); }
     .cl-item.checked .cl-box { background: var(--green); border-color: var(--green); }
     .cl-item.checked .cl-box::after { content: ''; display: block; width: 4px; height: 8px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(42deg) translate(-1px,-1px); }
+    /* Заголовок пункта и пояснение — соседи, а не вложенные друг в друга:
+       line-through наследуется вниз и снять его у потомка нельзя, а
+       перечёркнутый абзац в три строки читать невозможно. */
+    .cl-lines { display: flex; flex-direction: column; }
     .cl-text { font-size: .83rem; color: var(--mid); line-height: 1.5; }
+    .cl-text strong { color: var(--navy); font-weight: 500; }
+    .cl-note { font-size: .78rem; color: var(--muted); line-height: 1.5; margin-top: 3px; }
     .cl-item.checked .cl-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(0,0,0,.18); }
+    .cl-item.checked .cl-text strong { color: var(--muted); }
+    .cl-item.checked .cl-note { opacity: .6; }
 
     /* ── LIFE TAB ────────────────────────────── */
     .life-video-block { margin-bottom: 3rem; }
@@ -830,7 +838,7 @@
     <button class="tab-btn" data-tab="flights">Перелёты</button>
     <button class="tab-btn" data-tab="life">На борту</button>
     <button class="tab-btn" data-tab="budget">Бюджет</button>
-    <button class="tab-btn" data-tab="checklists">Чек-листы</button>
+    <button class="tab-btn" data-tab="checklists">Что взять</button>
   </div>
 </nav>
 
@@ -849,7 +857,7 @@
       <button class="hero-nav-link" onclick="showTab('flights')">Перелёты</button>
       <button class="hero-nav-link" onclick="showTab('life')">На борту</button>
       <button class="hero-nav-link" onclick="showTab('budget')">Бюджет</button>
-      <button class="hero-nav-link" onclick="showTab('checklists')">Чек-листы</button>
+      <button class="hero-nav-link" onclick="showTab('checklists')">Что взять</button>
     </div>
   </div>
 
@@ -1432,96 +1440,29 @@
   <div class="tab-content">
     <section>
       <div class="container">
-        <p class="section-label">Подготовка</p>
-        <h2 class="section-title">Чек-листы</h2>
+        <p class="section-label">Сборы</p>
+        <h2 class="section-title">Что взять с собой</h2>
         <div class="section-rule"></div>
         <div class="cl-groups">
 
-          <div class="cl-group open" id="clg-docs">
+          <div class="cl-group open" id="clg-pack">
             <div class="cl-head" onclick="toggleCL(this)">
-              <div class="cl-left"><span class="cl-icon">📋</span><span class="cl-title">Документы и финансы</span></div>
+              <div class="cl-left"><span class="cl-icon">🎒</span><span class="cl-title">Личные вещи</span></div>
               <div style="display:flex;align-items:center;gap:10px;">
-                <span class="cl-count" id="clc-docs"></span>
+                <span class="cl-count" id="clc-pack"></span>
                 <span class="cl-arrow">▼</span>
               </div>
             </div>
             <div class="cl-body">
-              <label class="cl-item" data-id="docs-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Skipper licence + VHF licence капитана</span></label>
-              <label class="cl-item" data-id="docs-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Sailing licence (привезти на ресепшен в Baia Levante)</span></label>
-              <label class="cl-item" data-id="docs-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Карта с лимитом 4000 € для залога 3500 €</span></label>
-              <label class="cl-item" data-id="docs-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Все подтверждения броней — в одной папке/чате</span></label>
-              <label class="cl-item" data-id="docs-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Паспорта всех на борту</span></label>
-            </div>
-          </div>
-
-          <div class="cl-group" id="clg-coord">
-            <div class="cl-head" onclick="toggleCL(this)">
-              <div class="cl-left"><span class="cl-icon">📅</span><span class="cl-title">Координация с маринами</span></div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span class="cl-count" id="clc-coord"></span>
-                <span class="cl-arrow">▼</span>
-              </div>
-            </div>
-            <div class="cl-body">
-              <label class="cl-item" data-id="coord-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">25.09 — написать Клаудии (Sea Panarea) для проверки погоды</span></label>
-              <label class="cl-item" data-id="coord-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Уточнить точное время восхода 30.09 на Стромболи</span></label>
-              <label class="cl-item" data-id="coord-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Уточнить у Spartivento: детские спасжилеты на 4 ребёнка</span></label>
-              <label class="cl-item" data-id="coord-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Уточнить осадку лодки (2.28 м или shallow keel)</span></label>
-            </div>
-          </div>
-
-          <div class="cl-group" id="clg-team">
-            <div class="cl-head" onclick="toggleCL(this)">
-              <div class="cl-left"><span class="cl-icon">⛵</span><span class="cl-title">Команда (до старта)</span></div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span class="cl-count" id="clc-team"></span>
-                <span class="cl-arrow">▼</span>
-              </div>
-            </div>
-            <div class="cl-body">
-              <label class="cl-item" data-id="team-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Распределить каюты (4 семьи + одиночка)</span></label>
-              <label class="cl-item" data-id="team-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Договориться про еду: общий стол или по семьям</span></label>
-              <label class="cl-item" data-id="team-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Закупочный список (большая закупка в Capo d'Orlando)</span></label>
-              <label class="cl-item" data-id="team-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Кто встаёт на рассвет 30.09 — извержения Стромболи</span></label>
-            </div>
-          </div>
-
-          <div class="cl-group" id="clg-gear">
-            <div class="cl-head" onclick="toggleCL(this)">
-              <div class="cl-left"><span class="cl-icon">🎒</span><span class="cl-title">Снаряжение (привезти)</span></div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span class="cl-count" id="clc-gear"></span>
-                <span class="cl-arrow">▼</span>
-              </div>
-            </div>
-            <div class="cl-body">
-              <label class="cl-item" data-id="gear-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Детские спасжилеты по размерам (если нет на лодке)</span></label>
-              <label class="cl-item" data-id="gear-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Маски, трубки, ласты — Lisca Bianca (фумаролы)</span></label>
-              <label class="cl-item" data-id="gear-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Powerbanks (на буях электричества нет)</span></label>
-              <label class="cl-item" data-id="gear-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Свои полотенца на пляж</span></label>
-              <label class="cl-item" data-id="gear-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Защита от солнца: крем SPF 50+, шляпы, очки</span></label>
-              <label class="cl-item" data-id="gear-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Лёгкие свитера/ветровки — в море прохладно вечером</span></label>
-              <label class="cl-item" data-id="gear-6"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Морская соль для готовки (вода опреснённая)</span></label>
-              <label class="cl-item" data-id="gear-7"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Аптечка: морская болезнь, детские лекарства, общая</span></label>
-              <label class="cl-item" data-id="gear-8"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Налобный фонарик капитану для ночных манёвров</span></label>
-            </div>
-          </div>
-
-          <div class="cl-group" id="clg-rules">
-            <div class="cl-head" onclick="toggleCL(this)">
-              <div class="cl-left"><span class="cl-icon">📌</span><span class="cl-title">Правила на борту</span></div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span class="cl-count" id="clc-rules"></span>
-                <span class="cl-arrow">▼</span>
-              </div>
-            </div>
-            <div class="cl-body">
-              <label class="cl-item" data-id="rules-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Воду экономить: 50 л/чел/день на 12 чел — впритык</span></label>
-              <label class="cl-item" data-id="rules-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Душиться на берегу в маринах (Vulcano, Salina, Lipari)</span></label>
-              <label class="cl-item" data-id="rules-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Туалет сливать только в открытом море между островов</span></label>
-              <label class="cl-item" data-id="rules-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">На бую — якорный огонь обязательно ночью</span></label>
-              <label class="cl-item" data-id="rules-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">На тузике дети только в спасжилетах</span></label>
-              <label class="cl-item" data-id="rules-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-text">Звонок в марину за 20 мин до подхода</span></label>
+              <label class="cl-item" data-id="pack-0"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Обувь со светлой чистой подошвой</strong> — всем, и детям и взрослым</span><span class="cl-note">В этом ходим только на яхте. Босиком скользковато, в кроксах сложновато спрыгивать на берег со швартовыми, поэтому идеально — лёгкие кроссовки или кеды с нескользящей подошвой. Детям кроксы отлично :)</span></span></label>
+              <label class="cl-item" data-id="pack-1"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Пауэрбэнк</strong> — каждому свой, нормальный</span><span class="cl-note">Ночуем в маринах, там лодка включается в розетку и с электричеством всё хорошо. Но два дня подряд стоянка без электричества ночью, а днём розетки не работают никогда.</span></span></label>
+              <label class="cl-item" data-id="pack-2"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Перчатки</strong>, если есть — для сейлинга или хоть для велика</span><span class="cl-note">Понадобятся, чтобы управляться с верёвками.</span></span></label>
+              <label class="cl-item" data-id="pack-3"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Драмина</strong> себе и детям, на всякий случай</span></span></label>
+              <label class="cl-item" data-id="pack-4"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Крем от солнца и панамы</strong> себе и детям — обязательно</span></span></label>
+              <label class="cl-item" data-id="pack-5"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Спортивная синтетическая одежда</strong> на переходы</span><span class="cl-note">В ней удобнее всего, если участвуешь в физической деятельности. А участвовать кому-то точно придётся: нужна помощь на швартовках — когда паркуем яхту в марину и когда уходим — и если будем ставить паруса. Это весело!</span></span></label>
+              <label class="cl-item" data-id="pack-6"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Маска и трубка</strong> — чтобы классно поплавать среди фумарол</span><span class="cl-note">Lisca Bianca, день III: пузырьки идут со дна.</span></span></label>
+              <label class="cl-item" data-id="pack-7"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Свои полотенца для пляжа</strong></span><span class="cl-note">На яхте будут обычные полотенца для душа, по два на каюту. Детям полотенца, а также полотенца и подстилки для пляжа — свои.</span></span></label>
+              <label class="cl-item" data-id="pack-8"><input type="checkbox"><div class="cl-box"></div><span class="cl-lines"><span class="cl-text"><strong>Лёгкая ветровка</strong> себе и детям — на случай вечернего бриза</span></span></label>
             </div>
           </div>
 
@@ -2013,17 +1954,23 @@ function updateCount(groupId) {
 function initChecklists() {
   const state = clLoad();
   document.querySelectorAll('.cl-item').forEach(item => {
-    const id = item.dataset.id;
-    if (state[id]) item.classList.add('checked');
-    item.addEventListener('click', () => {
-      item.classList.toggle('checked');
+    const id  = item.dataset.id;
+    const box = item.querySelector('input[type=checkbox]');
+    box.checked = !!state[id];
+    item.classList.toggle('checked', box.checked);
+    // Слушаем change у чекбокса, а не click у label: клик по label активирует
+    // input, и синтетический click с него всплывает обратно на label. С
+    // обработчиком на click пункт переключался дважды за нажатие и всегда
+    // возвращался в исходное состояние — отметить было невозможно.
+    box.addEventListener('change', () => {
+      item.classList.toggle('checked', box.checked);
       const s = clLoad();
-      s[id] = item.classList.contains('checked');
+      s[id] = box.checked;
       clSave(s);
       updateCount(item.closest('.cl-group').id);
     });
   });
-  ['clg-docs','clg-coord','clg-team','clg-gear','clg-rules'].forEach(updateCount);
+  ['clg-pack'].forEach(updateCount);
 }
 
 window.toggleCL = function(head) {
