@@ -103,11 +103,14 @@
     .tab-btn:hover { color: rgba(255,255,255,.75); }
     .tab-btn.active { color: #fff; border-bottom-color: var(--sand); }
 
-    /* Бренд съедает ~140 px из 375 — на телефоне все 7 табов не влезают.
+    /* Бренд съедает 120 px — на узком экране все 8 табов не влезают.
        Убираем его из нава: на карте и так есть заголовок «Липары 2026».
-       Семь табов в один ряд всё равно не помещаются, поэтому справа —
-       градиент-подсказка, что строку можно тянуть. */
-    @media (max-width: 900px) {
+       Восемь табов требуют 822 px, плюс бренд — 942, поэтому порог 950.
+       Раньше было 900, но с появлением «Рестиков» между 900 и 942 бренд
+       ещё виден, а последний таб уже обрезан. Ниже порога табы всё равно
+       шире экрана, поэтому справа — градиент-подсказка, что строку можно
+       тянуть. */
+    @media (max-width: 950px) {
       .nav-brand { display: none; }
       .tabs { width: 100%; }
       .tab-btn { padding: 0 12px; letter-spacing: .1em; }
@@ -764,6 +767,36 @@
     .cl-item.checked .cl-text strong { color: var(--muted); }
     .cl-item.checked .cl-note { opacity: .6; }
 
+    /* ── ВКЛАДКА «РЕСТИКИ» ───────────────────── */
+    .food-intro { font-size: .93rem; color: var(--mid); line-height: 1.75; max-width: 660px; margin-bottom: 2.2rem; font-style: italic; }
+    .food-stops { display: flex; flex-direction: column; gap: 14px; }
+    .food-stop { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .fs-head { display: flex; align-items: baseline; gap: 12px; padding: 11px 18px; background: var(--navy); flex-wrap: wrap; }
+    .fs-day { font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sand-l); white-space: nowrap; }
+    .fs-place { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: #fff; line-height: 1.1; }
+    .fs-note { padding: 11px 18px 0; font-size: .79rem; color: var(--muted); line-height: 1.55; font-style: italic; }
+    .rest-list { list-style: none; padding: 11px 18px 15px; display: flex; flex-direction: column; gap: 12px; }
+    .rest-main { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+    .rest-name { font-size: .91rem; font-weight: 500; color: var(--navy); text-decoration: none; border-bottom: 1px solid rgba(28,107,120,.35); }
+    .rest-name:hover { color: var(--sea); border-bottom-color: var(--sea); }
+    .rest-rating { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: var(--sand); }
+    /* Бейдж Мишлена — песочный, чтобы отличался от рейтинга Google цифрой */
+    .rest-star { font-size: .59rem; letter-spacing: .09em; text-transform: uppercase; background: rgba(201,146,74,.16); color: #8A5F26; padding: 3px 7px; border-radius: 3px; white-space: nowrap; }
+    .rest-meta { font-size: .79rem; color: var(--muted); line-height: 1.55; margin-top: 3px; }
+    .rest-meta b { color: var(--mid); font-weight: 500; }
+    /* Предупреждение про закрытые заведения, которые попадаются в подборках */
+    .fs-warn { margin: 0 18px 15px; background: #FEF3E2; border-left: 3px solid var(--rust); padding: 9px 13px; border-radius: 0 var(--radius) var(--radius) 0; font-size: .78rem; color: #6B2D1A; line-height: 1.55; }
+
+    .wine-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 720px) { .wine-list { grid-template-columns: 1fr; } }
+    .wine-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; }
+    .wc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--navy); line-height: 1.15; }
+    .wc-where { font-size: .64rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sand); margin: 5px 0 10px; }
+    .wc-price { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+    .wc-text { font-size: .83rem; color: var(--mid); line-height: 1.65; }
+    .wc-contact { font-size: .77rem; color: var(--muted); margin-top: 10px; line-height: 1.65; word-break: break-word; }
+    .wc-contact a { color: var(--sea); text-decoration: none; border-bottom: 1px solid rgba(28,107,120,.3); }
+
     /* ── LIFE TAB ────────────────────────────── */
     .life-video-block { margin-bottom: 3rem; }
     .life-video-block video { width: 100%; max-width: 480px; border-radius: var(--radius); display: block; }
@@ -906,6 +939,7 @@
     <button class="tab-btn" data-tab="marinas">Марины</button>
     <button class="tab-btn" data-tab="flights">Перелёты</button>
     <button class="tab-btn" data-tab="life">На борту</button>
+    <button class="tab-btn" data-tab="food">Рестики</button>
     <button class="tab-btn" data-tab="budget">Бюджет</button>
     <button class="tab-btn" data-tab="checklists">Что взять</button>
   </div>
@@ -926,6 +960,7 @@
       <button class="hero-nav-link" onclick="showTab('marinas')">Марины</button>
       <button class="hero-nav-link" onclick="showTab('flights')">Перелёты</button>
       <button class="hero-nav-link" onclick="showTab('life')">На борту</button>
+      <button class="hero-nav-link" onclick="showTab('food')">Рестики</button>
       <button class="hero-nav-link" onclick="showTab('budget')">Бюджет</button>
       <button class="hero-nav-link" onclick="showTab('checklists')">Что взять</button>
     </div>
@@ -1687,6 +1722,321 @@
           </div>
 
         </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ═══════════ FOOD TAB ═══════════ -->
+<div id="tab-food" class="tab-panel">
+  <div class="tab-content">
+    <section>
+      <div class="container">
+        <p class="section-label">Где поесть</p>
+        <h2 class="section-title">Рестики</h2>
+        <div class="section-rule"></div>
+
+        <p class="food-intro">
+          Рейтинги Google на конец июля 2026 — к сентябрю могут немного сдвинуться.
+          Названия ведут на Google Maps. На двенадцать человек бронировать надо
+          везде: залы на островах маленькие.
+        </p>
+
+        <div class="food-stops">
+
+          <div class="food-stop">
+            <div class="fs-head">
+              <span class="fs-day">сб 26.09 и пт 02.10</span>
+              <span class="fs-place">Capo d'Orlando</span>
+            </div>
+            <div class="fs-note">В самой марине хороших ресторанов нет — только бар и пиццерия с рейтингом 3,5. За ужином 5–10 минут на такси в город.</div>
+            <ul class="rest-list">
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Amici+Miei+Ristorante+Pizzeria+Capo+d+Orlando+Italy" target="_blank" rel="noopener">Amici Miei</a>
+                  <span class="rest-rating">4,7</span>
+                </div>
+                <div class="rest-meta">Сицилийская кухня и <b>пиццерия</b> — спасение для детей. Работают как банкетный зал, стол на 12 берут спокойно. Выходной среда. +39 379 101 1459</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Terra+Capo+d+Orlando+Italy" target="_blank" rel="noopener">Ristorante Terra</a>
+                  <span class="rest-rating">4,3</span>
+                </div>
+                <div class="rest-meta">Рыба и мясо, продукты Мессины. Специализируются на групповых ужинах, без выходных.</div>
+              </li>
+            </ul>
+            <div class="fs-warn">Doria 66 — самый высокий рейтинг в городе (4,8), но компании больше восьми человек он не принимает.</div>
+          </div>
+
+          <div class="food-stop">
+            <div class="fs-head">
+              <span class="fs-day">вс 27.09 · день I</span>
+              <span class="fs-place">Vulcano</span>
+            </div>
+            <ul class="rest-list">
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+La+Forgia+Maurizio+Vulcano+Italy" target="_blank" rel="noopener">La Forgia Maurizio</a>
+                  <span class="rest-rating">4,5</span>
+                </div>
+                <div class="rest-meta">Эолийская кухня с арабскими нотами, ~35 €. Прямо в Porto di Levante. Зал маленький — звонить сильно заранее: +39 334 766 0069</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Ficodindia+Pane+Cunzato+Vulcano+Italy" target="_blank" rel="noopener">Ficodindia</a>
+                  <span class="rest-rating">4,6</span>
+                </div>
+                <div class="rest-meta">Pane cunzato и морепродукты, 20–30 €. Самый высокий рейтинг на острове. Сезонность уточнить: +39 335 760 9452</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=I+Tenerumi+Therasia+Vulcano+Italy" target="_blank" rel="noopener">I Tenerumi</a>
+                  <span class="rest-star">★★ Мишлен</span>
+                </div>
+                <div class="rest-meta">Растительная кухня, шеф Davide Guidara. Рядом <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Cappero+Therasia+Vulcano+Italy" target="_blank" rel="noopener">Il Cappero</a> — одна звезда и зелёная. Оба в Therasia Resort: 2 км в горку на Vulcanello, нужен трансфер отеля. Дегустационные сеты, с детьми не ходят. +39 090 985 2555</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="food-stop">
+            <div class="fs-head">
+              <span class="fs-day">пн 28.09 · день II</span>
+              <span class="fs-place">Panarea</span>
+            </div>
+            <div class="fs-note">На Panarea рейтинги ниже, чем на других островах, а цены выше. Мишленовских ресторанов нет.</div>
+            <ul class="rest-list">
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Da+Pina+Panarea+Italy" target="_blank" rel="noopener">Da Pina</a>
+                  <span class="rest-rating">4,4</span>
+                </div>
+                <div class="rest-meta">~55 €, два просторных зала в саду. Работают с яхтами и <b>принимают большие компании</b>.</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Da+Adelina+Panarea+Italy" target="_blank" rel="noopener">Da Adelina</a>
+                  <span class="rest-rating">4,2</span>
+                </div>
+                <div class="rest-meta">~40 €, <b>прямо на Scalo Ditella</b> — от тузика пара шагов. Две террасы, вид на Стромболи. +39 334 113 2496</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Da+Paolino+Panarea+Italy" target="_blank" rel="noopener">Da Paolino</a>
+                  <span class="rest-rating">4,1</span>
+                </div>
+                <div class="rest-meta">20–40 €, простая домашняя кухня и большая веранда — с детьми проще всего. В горку от Ditella.</div>
+              </li>
+            </ul>
+            <div class="fs-warn">Hycesia часто попадается в подборках, но статус противоречивый: справочники помечают как закрытый навсегда. Без звонка не рассчитывать.</div>
+          </div>
+
+          <div class="food-stop">
+            <div class="fs-head">
+              <span class="fs-day">вт 29.09 · день III</span>
+              <span class="fs-place">Stromboli</span>
+            </div>
+            <div class="fs-note">От Scari в посёлок идти в горку. Punta Lena стоит на берегу в Ficogrande — с тузика удобнее всего.</div>
+            <ul class="rest-list">
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Il+Canneto+Stromboli+Italy" target="_blank" rel="noopener">Il Canneto</a>
+                  <span class="rest-rating">4,3</span>
+                </div>
+                <div class="rest-meta">~35 €, семейный, 40+ лет на острове. По отзывам особенно добры к детям. Только ужин. 090 986014</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Trattoria+Ai+Gechi+Stromboli+Italy" target="_blank" rel="noopener">Ai Gechi</a>
+                  <span class="rest-rating">4,3</span>
+                </div>
+                <div class="rest-meta">~40 €, хлеб, паста и десерты домашние. Есть безглютеновое, вегетарианское и веганское меню. Только ужин. 338 357 7559</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Ristorante+Punta+Lena+Stromboli+Italy" target="_blank" rel="noopener">Punta Lena</a>
+                  <span class="rest-rating">4,2</span>
+                  <span class="rest-star">в гиде Мишлен</span>
+                </div>
+                <div class="rest-meta">~35 €, терраса над морем с видом на Strombolicchio. Сезон до конца октября. 090 986204</div>
+              </li>
+            </ul>
+            <div class="fs-warn">L'Osservatorio — самый высокий рейтинг на острове и знаменитый вид на извержения — закрыт бессрочно, так написано на их собственном сайте.</div>
+          </div>
+
+          <div class="food-stop">
+            <div class="fs-head">
+              <span class="fs-day">ср 30.09 · день IV</span>
+              <span class="fs-place">Salina</span>
+            </div>
+            <ul class="rest-list">
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Gambero+Lingua+Salina+Italy" target="_blank" rel="noopener">Il Gambero</a>
+                  <span class="rest-rating">4,4</span>
+                </div>
+                <div class="rest-meta">Lingua, 10 минут на такси. 10–50 €: рыба, пицца и pane cunzato — под разные аппетиты и детей. 090 984 3049</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=A+Cannata+Lingua+Salina+Italy" target="_blank" rel="noopener">A Cannata</a>
+                  <span class="rest-rating">4,5</span>
+                </div>
+                <div class="rest-meta">Lingua, 10–40 €. Рыба и овощи со своего огорода, первое место в Lingua.</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Nni+Lausta+Santa+Marina+Salina+Italy" target="_blank" rel="noopener">'Nni Lausta</a>
+                  <span class="rest-rating">4,4</span>
+                  <span class="rest-star">в гиде Мишлен</span>
+                </div>
+                <div class="rest-meta">~45 €, <b>5 минут пешком от марины</b>. Шеф Fabio Giuffré, тенистая терраса на втором этаже. С детьми лучше ранняя посадка. 090 984 3486</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Signum+Malfa+Salina+Italy" target="_blank" rel="noopener">Signum</a>
+                  <span class="rest-star">★ Мишлен + зелёная</span>
+                </div>
+                <div class="rest-meta">Malfa, шеф Martina Caruso, десятый год со звездой. Дегустационные сеты, высокий чек. <b>Отель закрывается 5 октября</b> — 30.09 формально сезон, но звонить обязательно: +39 090 984 4222. На TripAdvisor 3,9 при поляризованных отзывах — звезда и публика тут расходятся.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="food-stop">
+            <div class="fs-head">
+              <span class="fs-day">чт 01.10 · день V</span>
+              <span class="fs-place">Lipari</span>
+            </div>
+            <div class="fs-note">Из Porto Pignataro в центр есть бесплатный трансфер марины.</div>
+            <ul class="rest-list">
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Osteria+San+Bartolo+Lipari+Italy" target="_blank" rel="noopener">Osteria San Bartolo</a>
+                  <span class="rest-rating">4,7</span>
+                </div>
+                <div class="rest-meta">30–50 €, набережная Marina Lunga. Лучший рейтинг в городе, столики у моря, берут группы. Бронь обязательна: +39 090 896 1317</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Il+Corallo+Lipari+Italy" target="_blank" rel="noopener">Il Corallo</a>
+                  <span class="rest-rating">4,5</span>
+                </div>
+                <div class="rest-meta">Рыба и морепродукты, Corso Vittorio Emanuele, 5 минут от Marina Corta. Работает ежедневно. +39 338 728 1860</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=Filippino+Lipari+Italy" target="_blank" rel="noopener">Filippino</a>
+                  <span class="rest-rating">4,2</span>
+                  <span class="rest-star">в гиде Мишлен</span>
+                </div>
+                <div class="rest-meta">30–80 €, работает с 1910 года. Большой зал и тенистая пергола — <b>12 человек для них обычное дело</b>. В отзывах бывает «дорого относительно качества».</div>
+              </li>
+              <li class="rest">
+                <div class="rest-main">
+                  <a class="rest-name" href="https://www.google.com/maps/search/?api=1&amp;query=CiauriMari+Lipari+Italy" target="_blank" rel="noopener">CiauriMari</a>
+                  <span class="rest-rating">4,6</span>
+                </div>
+                <div class="rest-meta"><b>Прямо в Porto Pignataro</b>, часть комплекса EOLMARE — никого никуда везти не надо. Но статус противоречивый: спросить у марины при подтверждении стоянки.</div>
+              </li>
+            </ul>
+            <div class="fs-warn">L'Anfora есть в гиде Мишлен и попадается в подборках, но у него выходной именно четверг — ровно наш вечер.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <p class="section-label">Salina, свободный день IV</p>
+        <h2 class="section-title">Дегустация Malvasia</h2>
+        <div class="section-rule"></div>
+
+        <p class="food-intro">
+          Malvasia delle Lipari — сладкое пассито из подвяленного винограда, не то
+          вино, что пьют под рыбу за ужином. У большинства хозяйств есть и сухие
+          белые, так что на дегустации дают и то и то. Приходим в марину к 10–11
+          утра, так что вторая половина дня свободна. Даты закрытия сезона не
+          публикует никто — остров сворачивается к середине октября, спрашивать
+          про 30 сентября прямым вопросом.
+        </p>
+
+        <div class="wine-list">
+
+          <div class="wine-card">
+            <div class="wc-name">Hauner</div>
+            <div class="wc-where">Lingua · 3 км от марины</div>
+            <div class="wc-price">20 € с человека</div>
+            <div class="wc-text">
+              Пять вин и пять закусок под них — тарелка сицилийских и эолийских
+              продуктов. Экскурсия и история семьи: основатель Карло Хаунер был
+              художником, переехал на остров в 1970-х и стал одним из тех, кто
+              возродил Malvasia. Дегустация в саду.
+              <br><br>
+              В Lingua же оба ресторана на этот вечер — Il Gambero и A Cannata.
+              Одна поездка на всё.
+            </div>
+            <div class="wc-contact">
+              <a href="mailto:degustazioni@hauner.it">degustazioni@hauner.it</a><br>
+              WhatsApp +39 392 776 8149
+            </div>
+          </div>
+
+          <div class="wine-card">
+            <div class="wc-name">Capofaro</div>
+            <div class="wc-where">Tasca d'Almerita · между Malfa и Santa Marina</div>
+            <div class="wc-price">80 € с человека</div>
+            <div class="wc-text">
+              Три винтажа Malvasia плюс сухое белое Leone, к каждому местный сыр,
+              каперсы и вялёные томаты. Прогулка по винограднику с сомелье.
+              Винный резорт Relais &amp; Châteaux, самое известное хозяйство острова.
+              Мест ограниченное число.
+              <br><br>
+              Вчетверо дороже Hauner. За это — имя, пятизвёздочный приём и
+              виноградники у самого моря. Отмена бесплатна до двух дней, позже до
+              50 % стоимости.
+            </div>
+            <div class="wc-contact">
+              <a href="mailto:info@capofaro.it">info@capofaro.it</a><br>
+              +39 090 9844330
+            </div>
+          </div>
+
+          <div class="wine-card">
+            <div class="wc-name">Fenech</div>
+            <div class="wc-where">Malfa · 7 минут на такси</div>
+            <div class="wc-price">TripAdvisor 4,5</div>
+            <div class="wc-text">
+              Самый личный вариант: по отзывам, вино наливает сам синьор Фенек и
+              рассказывает истории. Экскурсия по цехам и хранилищу, потом
+              сицилийский салат, брускетта, оливки, сыр и хлеб под разные вина.
+              Их сладкое Malvasia delle Lipari Passito собрало много наград.
+            </div>
+            <div class="wc-contact">+39 090 984 4041</div>
+          </div>
+
+          <div class="wine-card">
+            <div class="wc-name">Caravaglio</div>
+            <div class="wc-where">Malfa · 7 минут на такси</div>
+            <div class="wc-price">органика с 1980-х</div>
+            <div class="wc-text">
+              16 гектаров с участками на четырёх островах — Salina, Lipari, Vulcano
+              и Stromboli. Сертифицированная органика с самого основания. Новая
+              подземная винодельня с видом на море и Стромболи на горизонте.
+            </div>
+            <div class="wc-contact">
+              <a href="mailto:ospitalita@caravaglio.it">ospitalita@caravaglio.it</a><br>
+              +39 392 256 8617
+            </div>
+          </div>
+
+        </div>
+
+        <p class="food-intro" style="margin-top:2rem;margin-bottom:0;">
+          Двенадцать человек — много для семейного хозяйства, стол может не влезть.
+          В Malfa от Santa Marina 7 минут на такси, около 20 €, но на всех нужно
+          два девятиместных минивэна туда и обратно; в Lingua ехать заметно ближе.
+        </p>
       </div>
     </section>
   </div>
