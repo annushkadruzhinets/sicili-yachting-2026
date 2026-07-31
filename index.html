@@ -767,6 +767,25 @@
     .cl-item.checked .cl-text strong { color: var(--muted); }
     .cl-item.checked .cl-note { opacity: .6; }
 
+    /* ── ДОКУМЕНТАЦИЯ НА ЛОДКУ (низ «На борту») ─ */
+    .boat-doc { margin-top: 3.2rem; padding-top: 2.4rem; border-top: 1px solid var(--border); }
+    .boat-doc img { width: 100%; max-width: 760px; border-radius: var(--radius); display: block; box-shadow: var(--shadow); }
+    .bd-caption { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: 11px; }
+    .bd-specs { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 16px 0 4px; max-width: 760px; }
+    .bd-spec { font-size: .8rem; color: var(--mid); }
+    .bd-spec b { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--navy); font-weight: 500; }
+    /* Ссылка на PDF: размер вынесен в подпись — файл тяжёлый, на мобильном
+       интернете нажимать такое вслепую неприятно. */
+    .bd-link {
+      display: inline-flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
+      margin-top: 18px; padding: 11px 16px;
+      background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+      color: var(--sea); text-decoration: none; font-size: .87rem;
+      transition: border-color .2s, background .2s;
+    }
+    .bd-link:hover { border-color: var(--sea); background: rgba(28,107,120,.04); }
+    .bd-link span { font-size: .73rem; color: var(--muted); }
+
     /* ── ВКЛАДКА «РЕСТИКИ» ───────────────────── */
     .food-intro { font-size: .93rem; color: var(--mid); line-height: 1.75; max-width: 660px; margin-bottom: 2.2rem; font-style: italic; }
     .food-stops { display: flex; flex-direction: column; gap: 14px; }
@@ -1721,6 +1740,23 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="boat-doc">
+          <img src="photos/chaos.jpg" alt="Chaos, Sun Odyssey 490, у причала в Marina Spartivento">
+          <div class="bd-caption">Chaos · Sun Odyssey 490 · Marina Spartivento</div>
+          <div class="bd-specs">
+            <div class="bd-spec"><b>14,80 м</b> длина</div>
+            <div class="bd-spec"><b>5 + 1</b> каюты</div>
+            <div class="bd-spec"><b>3 + 1</b> туалета</div>
+            <div class="bd-spec"><b>640 л</b> вода</div>
+            <div class="bd-spec"><b>240 л</b> топливо</div>
+            <div class="bd-spec"><b>80</b> л. с.</div>
+            <div class="bd-spec"><b>2019</b> год</div>
+          </div>
+          <a class="bd-link" href="docs/chaos-sun-odyssey-490.pdf" target="_blank" rel="noopener">
+            Документация на лодку <span>PDF · 39 МБ · 8 страниц</span>
+          </a>
         </div>
       </div>
     </section>
