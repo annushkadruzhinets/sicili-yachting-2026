@@ -852,12 +852,11 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       display: grid;
-      grid-template-columns: 148px 1fr auto;
+      grid-template-columns: 148px 1fr;
       align-items: center;
       gap: 0;
       overflow: hidden;
     }
-    .flight-card.fc-pending { opacity: .72; background: var(--cream); }
     .fc-family {
       padding: 16px 18px;
       font-size: .82rem;
@@ -889,29 +888,9 @@
       flex-wrap: wrap;
     }
     .fc-flight { color: var(--sea); font-weight: 500; }
-    .fc-status {
-      padding: 14px 18px;
-      border-left: 1px solid var(--border);
-      align-self: stretch;
-      display: flex;
-      align-items: center;
-    }
-    .fc-badge {
-      font-size: .68rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-    .fc-badge-ok { background: var(--green-bg); color: var(--green); }
-    .fc-badge-pending { background: var(--cream-d); color: var(--muted); }
-    .fc-badge-note { background: #FEF3E2; color: #8A5A00; }
     @media (max-width: 540px) {
       .flight-card { grid-template-columns: 1fr; }
       .fc-family { border-right: none; border-bottom: 1px solid var(--border); align-self: auto; padding: 12px 14px; }
-      .fc-status { border-left: none; border-top: 1px solid var(--border); align-self: auto; padding: 10px 14px; }
       .fc-body { padding: 12px 14px; }
     }
 
@@ -2100,7 +2079,6 @@
                 <span>25 сентября · 20:45 → 23:10</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Лиза, Диня и Саломея -->
@@ -2114,7 +2092,6 @@
                 <span>стыковка в Стамбуле 2 ч 20 м · летят вместе с Коляном</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Аня и Ромчик -->
@@ -2127,7 +2104,6 @@
                 <span>26 сентября · 11:15 → 13:25</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Наташа, Тёма и Даня -->
@@ -2139,7 +2115,6 @@
                 <span>26 сентября · 21:35 → 23:55</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Колян -->
@@ -2153,7 +2128,6 @@
                 <span>стыковка в Стамбуле 2 ч 20 м · летит вместе с Лизой, Диней и Саломеей</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
         </div>
@@ -2178,7 +2152,6 @@
                 <span>7 октября · 20:25 → 22:25</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Лиза, Диня и Саломея -->
@@ -2191,7 +2164,6 @@
                 <span>7 октября · 19:05 → 20:20</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Аня и Ромчик -->
@@ -2204,7 +2176,6 @@
                 <span>3 октября · 14:10 → 16:30</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Наташа, Тёма и Даня -->
@@ -2216,7 +2187,6 @@
                 <span>7 октября · 16:25 → 20:40</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
           <!-- Колян -->
@@ -2229,7 +2199,6 @@
                 <span>7 октября · 19:05 → 20:20</span>
               </div>
             </div>
-            <div class="fc-status"><span class="fc-badge fc-badge-ok">Куплено</span></div>
           </div>
 
         </div>
