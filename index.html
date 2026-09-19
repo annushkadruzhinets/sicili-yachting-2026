@@ -184,6 +184,24 @@
       transition: border-color .2s, color .2s;
     }
     .hero-nav-link:hover { border-color: var(--sand); color: var(--sand-l); }
+    /* Внешняя ссылка на прогноз: намеренно не кнопка-пилюля, чтобы не
+       путалась с табами — она уводит с сайта, а не переключает раздел. */
+    .hero-weather { margin-top: 1.6rem; text-align: center; line-height: 1.7; }
+    .hero-weather a {
+      color: var(--sand-l);
+      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(232,192,122,.4);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .hero-weather a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.6); }
+    .hero-weather span {
+      display: block;
+      margin-top: 7px;
+      font-size: .73rem;
+      color: rgba(255,255,255,.38);
+    }
     .hero-stats {
       display: flex;
       gap: 0;
@@ -988,6 +1006,10 @@
       <button class="hero-nav-link" onclick="showTab('budget')">Бюджет</button>
       <button class="hero-nav-link" onclick="showTab('checklists')">Что взять</button>
     </div>
+    <p class="hero-weather">
+      <a href="https://www.meteoam.it/it/mappa-previsioni-osservazioni" target="_blank" rel="noopener">Погода и море на маршруте ↗</a>
+      <span>meteoam.it — метеослужба ВВС Италии, официальный источник для этих вод</span>
+    </p>
   </div>
 
   <div class="map-container">
